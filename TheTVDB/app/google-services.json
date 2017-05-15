@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "760451107284",
+    "project_id": "thetvdb-1352"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760451107284:android:a7cacc9119b74ed9",
+        "android_client_info": {
+          "package_name": "com.thetvdb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "760451107284-c1ttdna3mfc6hbt2b34q3svlocqnltiu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thetvdb",
+            "certificate_hash": "1402A53FE7E9E360EAC932651323A29BC9778180"
+          }
+        },
+        {
+          "client_id": "760451107284-ugdc5q61glpjca40roe2gibpk85qrhs9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqthkLaF94BxBq-2sM1HVYQ4PihwXQSJ4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

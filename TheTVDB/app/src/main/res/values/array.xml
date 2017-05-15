@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pager_elements">
+        <item>Episodes</item>
+        <item>Info</item>
+        <item>Actors</item>
+    </string-array>
+</resources>

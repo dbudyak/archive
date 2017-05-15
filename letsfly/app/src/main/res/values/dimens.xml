@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="start_menu_margin">25dp</dimen>
+    <dimen name="lable_side_pad">5dp</dimen>
+    <dimen name="label_top_pad">2dp</dimen>
+    <dimen name="label_corner_radius">10dp</dimen>
+    <dimen name="label_stroke_width">1dp</dimen>
+    <dimen name="path_dot_size">6dp</dimen>
+    <dimen name="start_screen_padding">20dp</dimen>
+    <dimen name="marker_anim_size">20dp</dimen>
+    <dimen name="marker_cap_text_size">20sp</dimen>
+</resources>

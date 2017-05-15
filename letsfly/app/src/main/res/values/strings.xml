@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">LetsFly</string>
+    <string name="title_activity_fly">Map</string>
+    <string name="find_button">Find</string>
+    <string name="error_field_empty">Field must not be an empty</string>
+    <string name="error_city_not_found">City not found</string>
+    <string name="error_field_data">Unable to get city data</string>
+</resources>

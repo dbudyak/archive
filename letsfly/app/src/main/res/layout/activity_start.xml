@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/start_screen_padding"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.testask.letsfly.ui.StartActivity">
+
+    <AutoCompleteTextView
+        android:id="@+id/search_source"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </AutoCompleteTextView>
+
+    <AutoCompleteTextView
+        android:id="@+id/search_dest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </AutoCompleteTextView>
+
+    <Button
+        android:id="@+id/find_button"
+        android:textColor="@android:color/white"
+        android:background="@color/furry_orange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/start_menu_margin"
+        android:text="@string/find_button"/>
+</LinearLayout>

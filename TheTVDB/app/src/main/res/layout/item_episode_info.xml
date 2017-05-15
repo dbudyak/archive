@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view_episode"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardElevation="@dimen/default_card_elevation"
+    card_view:cardUseCompatPadding="true"
+    card_view:contentPadding="@dimen/card_content_padding">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:elevation="@dimen/content_elevation"
+                  android:orientation="vertical"
+                  android:padding="@dimen/content_padding">
+
+        <ImageView
+            android:id="@+id/ep_info_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/header"/>
+
+        <TableLayout
+            android:id="@+id/ep_info_datatable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/table_content_padding"
+            android:paddingRight="@dimen/table_content_padding"
+            android:paddingTop="@dimen/content_padding">
+
+            <TableRow
+                android:weightSum="10">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="@string/info_first_aired"/>
+
+                <TextView
+                    android:id="@+id/ep_info_first_aired"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"/>
+            </TableRow>
+
+            <TableRow
+                android:weightSum="10">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="@string/info_episode_name"/>
+
+                <TextView
+                    android:id="@+id/ep_info_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"/>
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/ep_info_overview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/ep_info_addfav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@null"
+            android:elevation="@dimen/default_card_elevation"
+            android:padding="@dimen/content_padding"
+            android:text="@string/info_add_to_favorites"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/add_fav_text_size"
+            android:textStyle="bold"
+            android:translationZ="@dimen/add_fav_z"/>
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

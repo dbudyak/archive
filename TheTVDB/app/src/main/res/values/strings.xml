@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">TheTVDB</string>
+    <string name="remove_fav">Remove from favorites</string>
+    <string name="add_fav">Add to favorites</string>
+    <string name="info_first_aired">First Aired</string>
+    <string name="info_episode_name">Episode name</string>
+    <string name="info_add_to_favorites">Add to Favorites</string>
+    <string name="info_network">Network</string>
+    <string name="info_genre">Genre</string>
+    <string name="info_runtime">Runtime</string>
+    <string name="info_status">Status</string>
+    <string name="info_airs">Airs</string>
+    <string name="just_login">Войти</string>
+    <string name="thetvdb_com">TheTVDB.com</string>
+    <string name="online_tv_database_browser">Online TV Database browser</string>
+</resources>

@@ -1,0 +1,26 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="toolbar_elevation_dp">4dp</dimen>
+    <dimen name="just_login_padding">7dp</dimen>
+    <dimen name="login_btn_padding">10dp</dimen>
+    <dimen name="login_padding">30dp</dimen>
+    <dimen name="logo_text_size">40sp</dimen>
+    <dimen name="logo_padding">5dp</dimen>
+    <dimen name="logo_padding_bottom">10dp</dimen>
+    <dimen name="pager_height">200dp</dimen>
+    <dimen name="pager_add_height">20dp</dimen>
+    <dimen name="drawer_width">320dp</dimen>
+    <dimen name="header_text_size">30sp</dimen>
+    <dimen name="default_card_elevation">4dp</dimen>
+    <dimen name="card_content_padding">5dp</dimen>
+    <dimen name="content_elevation">2dp</dimen>
+    <dimen name="content_padding">10dp</dimen>
+    <dimen name="table_content_padding">20dp</dimen>
+    <dimen name="add_fav_text_size">16sp</dimen>
+    <dimen name="add_fav_z">10dp</dimen>
+    <dimen name="psts_div_padding">20dp</dimen>
+    <dimen name="psts_ind_h">3dp</dimen>
+    <dimen name="psts_padding_tab">10dp</dimen>
+</resources>

@@ -1,0 +1,66 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="material_drawer_background">@android:color/white</item>
+        <item name="material_drawer_primary_text">@color/material_drawer_primary_text</item>
+        <item name="material_drawer_primary_icon">@color/material_drawer_primary_icon</item>
+        <item name="material_drawer_secondary_text">@color/material_drawer_secondary_text</item>
+        <item name="material_drawer_hint_text">@color/material_drawer_hint_text</item>
+        <item name="material_drawer_divider">@color/material_drawer_divider</item>
+        <item name="material_drawer_selected">@color/material_drawer_selected</item>
+        <item name="material_drawer_selected_text">@color/material_drawer_selected_text</item>
+        <item name="material_drawer_header_selection_text">@color/material_drawer_header_selection_text</item>
+
+        <item name="searchViewStyle">@style/AppSearchViewStyle</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:statusBarColor" tools:targetApi="21">@color/colorPrimary</item>
+        <item name="android:navigationBarColor" tools:targetApi="21">@color/colorPrimary</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="21">true</item>
+        <item name="drawerArrowStyle">@style/AppDrawerArrowStyle</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTranslucentStatus" tools:targetApi="19">true</item>
+    </style>
+
+    <style name="AppSearchViewStyle" parent="Widget.AppCompat.Light.SearchView">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:textColorHintInverse">@android:color/white</item>
+        <item name="android:textColorHighlight">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="android:textCursorDrawable">@drawable/white_cursor</item>
+        <item name="android:textColorTertiary">@android:color/white</item>
+        <item name="android:textColorLink">@android:color/white</item>
+        <item name="android:textColorPrimaryDisableOnly">@android:color/white</item>
+        <item name="android:editTextColor">@android:color/white</item>
+        <item name="android:colorActivatedHighlight">@android:color/white</item>
+        <item name="queryBackground">@android:color/transparent</item>
+        <item name="searchIcon">@drawable/icon_toolbar_search</item>
+        <item name="closeIcon">@drawable/icon_toolbar_clear</item>
+        <item name="queryHint">"Найти книгу"</item>
+        <item name="android:imeActionId">6</item>
+    </style>
+
+    <!--<style name="AppTabs" parent="Widget.Design.TabLayout">-->
+        <!--<item name="tabIndicatorColor">@color/colorAccent</item>-->
+        <!--<item name="tabIndicatorHeight">2dp</item>-->
+        <!--<item name="tabPaddingStart">12dp</item>-->
+        <!--<item name="tabPaddingEnd">12dp</item>-->
+        <!--<item name="tabBackground">@color/colorPrimary</item>-->
+        <!--<item name="tabTextAppearance">@style/AppTabTextAppearance</item>-->
+        <!--<item name="tabSelectedTextColor">@android:color/white</item>-->
+    <!--</style>-->
+    <!--<style name="AppTabTextAppearance" parent="TextAppearance.Design.Tab">-->
+        <!--<item name="android:textSize">14sp</item>-->
+        <!--<item name="android:textColor">@android:color/white</item>-->
+        <!--<item name="textAllCaps">true</item>-->
+    <!--</style>-->
+    <style name="AppDrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@color/drawerArrowColor</item>
+    </style>
+</resources>
