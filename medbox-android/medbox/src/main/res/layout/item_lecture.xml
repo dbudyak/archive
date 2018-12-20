@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="ru.medbox.ui.viewmodel.LectureItemViewModel" />
+
+        <variable
+            name="handler"
+            type="ru.medbox.ui.handler.SalutaryEventHandler" />
+
+        <variable
+            name="lecture"
+            type="ru.medbox.db.model.Lecture" />
+    </data>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp">
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/article_full_item_image"
+            android:layout_width="0dp"
+            android:layout_height="204dp"
+            android:clickable="true"
+            android:elevation="10dp"
+            android:focusable="true"
+            android:onClick="@{() -> handler.onLectureItemClick(lecture)}"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                style="@style/ArticleImage"
+                app:imageUrl="@{viewModel.getThumbUrl()}"
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_transparent"
+                android:scaleType="center"
+                android:src="@drawable/play" />
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/article_full_item_title"
+            style="@style/ArticleTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="#484848"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/article_full_item_image"
+            app:mutableText="@{viewModel.getTitle()}" />
+
+        <TextView
+            android:id="@+id/article_full_item_description"
+            style="@style/ArticleDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:ems="10"
+            android:text="Вебинар"
+            android:textColor="#737373"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/article_full_item_title"
+            app:layout_constraintTop_toBottomOf="@+id/article_full_item_title" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</layout>

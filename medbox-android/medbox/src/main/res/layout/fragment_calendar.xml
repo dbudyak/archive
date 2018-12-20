@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/general_side_margin"
+        android:background="@drawable/bg_clouds"
+        android:paddingEnd="@dimen/general_side_margin"
+        tools:ignore="RtlSymmetry">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/wrench"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gotham_bold"
+            android:text="@string/promo_calendar_text1"
+            android:gravity="center_horizontal"
+            android:textAlignment="center"
+            android:textColor="#484848"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/promo_2" />
+
+        <TextView
+            android:id="@+id/promo_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="147dp"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center_horizontal"
+            android:text="@string/promo_caldendar_text2"
+            android:textAlignment="center"
+            android:textColor="#4a4a4a"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

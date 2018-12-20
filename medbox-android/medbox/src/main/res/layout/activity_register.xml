@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="ru.medbox.ui.viewmodel.RegisterViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/mparent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_clouds"
+        tools:context=".ui.activity.RegisterActivity">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="20dp"
+            android:lineSpacingExtra="6sp"
+            android:text="@string/login_register"
+            android:textColor="#304760"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/login_tel"
+            app:layout_constraintEnd_toEndOf="@+id/login_tel"
+            app:layout_constraintStart_toStartOf="@+id/login_tel" />
+
+        <Button
+            android:id="@+id/login_tel"
+            style="@style/BlueBtn"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="30dp"
+            android:elevation="8dp"
+            android:text="@string/login_by_phone"
+            app:layout_constraintBottom_toTopOf="@+id/text_login_or_social"
+            app:layout_constraintEnd_toEndOf="@+id/text_login_or_social"
+            app:layout_constraintStart_toStartOf="@+id/text_login_or_social" />
+
+        <TextView
+            android:id="@+id/text_login_or_social"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/gotham_bold"
+            android:text="@string/login_or_social"
+            android:textColor="#3a4a5a"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/login_social_btns"
+            app:layout_constraintEnd_toEndOf="@+id/login_social_btns"
+            app:layout_constraintStart_toStartOf="@+id/login_social_btns" />
+
+        <LinearLayout
+            android:id="@+id/login_social_btns"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintCircle="@id/mparent"
+            app:layout_constraintCircleRadius="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/login_vk"
+                style="@style/SocialBtn"
+                android:background="@drawable/social_vk_bg"
+                android:src="@drawable/vk" />
+
+            <ImageButton
+                android:id="@+id/login_fb"
+                style="@style/SocialBtn"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/social_fb_bg"
+                android:src="@drawable/facebook" />
+
+            <ImageButton
+                android:id="@+id/login_gg"
+                style="@style/SocialBtn"
+                android:background="@drawable/social_gg_bg"
+                android:src="@drawable/google" />
+
+            <!--<com.facebook.login.widget.LoginButton-->
+            <!--android:id="@+id/login_fb_real"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:visibility="gone" />-->
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="17dp"
+            android:text="@string/login_already_registered"
+            android:textColor="#3a4a5a"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/login"
+            app:layout_constraintEnd_toEndOf="@+id/login"
+            app:layout_constraintStart_toStartOf="@+id/login" />
+
+        <Button
+            android:id="@+id/login"
+            style="@style/BlueBtn"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="80dp"
+            android:text="@string/login_please"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>
+

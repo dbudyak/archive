@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_1_main"
+        android:icon="@drawable/ic_1"
+        android:title="@string/menu_1_main" />
+    <item
+        android:id="@+id/action_2_calendar"
+        android:icon="@drawable/ic_2"
+        android:title="@string/menu_2_calendar" />
+    <item
+        android:id="@+id/action_3_salutary"
+        android:icon="@drawable/ic_3"
+        android:title="@string/menu_3_salutary" />
+    <item
+        android:id="@+id/action_4_medcard"
+        android:icon="@drawable/ic_4"
+        android:title="@string/menu_4_medcard" />
+    <item
+        android:id="@+id/action_5_more"
+        android:icon="@drawable/ic_5"
+        android:title="@string/menu_5_more" />
+</menu>

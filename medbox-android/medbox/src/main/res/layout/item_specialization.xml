@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="ru.medbox.ui.viewmodel.SpecializationItemViewModel" />
+
+        <variable
+            name="handler"
+            type="ru.medbox.ui.handler.MainEventHandler" />
+
+        <variable
+            name="specialization"
+            type="ru.medbox.db.model.Specialization" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{() -> handler.onSpecializationClick(specialization)}"
+        tools:ignore="RtlSymmetry">
+
+        <LinearLayout
+            android:id="@+id/separator"
+            style="@style/ListItemSeparator"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/spec_image"
+            style="@style/ListItemImage"
+            app:imageUrl="@{viewModel.imageUrl}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/title"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/ListItemTitle"
+            app:layout_constraintLeft_toRightOf="@+id/spec_image"
+            app:layout_constraintRight_toLeftOf="@+id/more_icon"
+            app:layout_constraintStart_toEndOf="@+id/spec_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:mutableText="@{viewModel.name}" />
+
+        <TextView
+            android:id="@+id/description"
+            style="@style/ListItemDescription"
+            app:layout_constraintRight_toLeftOf="@+id/more_icon"
+            app:layout_constraintStart_toStartOf="@+id/title"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:mutableText="@{viewModel.description}" />
+
+        <ImageView
+            android:id="@+id/more_icon"
+            style="@style/ListItemMore"
+            android:src="@drawable/arrow_2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

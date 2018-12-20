@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">MedBox</string>
+
+    <string name="retry">Повторить</string>
+    <string name="post_error">An error occurred while loading the posts</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing emailcompletions."</string>
+
+    <string name="title_main">Онлайн-консультации</string>
+    <string name="title_salutary">Полезные советы</string>
+    <string name="title_medcard">Медицинская карта</string>
+    <string name="title_settings">Настройки</string>
+    <string name="title_articles">Статьи</string>
+    <string name="title_our_doctors">Наши врачи</string>
+    <string name="title_add_medcard">Заполните медкарту</string>
+    <string name="title_calendar">Календарь</string>
+    <string name="title_support">Поддержка</string>
+    <string name="title_account">Учетная запись</string>
+    <string name="title_legal">Юридическая информация</string>
+    <string name="title_doctor_info">Информация о враче</string>
+
+    <string name="menu_1_main">Главная</string>
+    <string name="menu_2_calendar">Календарь</string>
+    <string name="menu_3_salutary">Полезное</string>
+    <string name="menu_4_medcard">Медкарта</string>
+    <string name="menu_5_more">Еще</string>
+    <string name="salutary_lec_title">Лекции и вебинары</string>
+    <string name="salutary_lec_descr">Правильная подготовка к беременности</string>
+    <string name="salutary_art_title">Статьи по рубрикам</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="todo">TODO</string>
+    <string name="item_card_1_title">Планирую беременность</string>
+    <string name="item_card_1_descr">Мы поможем правильно подоготовится к беременности</string>
+
+    <string name="item_card_2_title">Я беременна</string>
+    <string name="item_card_2_descr">Правильное ведение беременности - 90% успеха</string>
+
+    <string name="item_card_3_title">Я - мама</string>
+    <string name="item_card_3_descr">Консультации педиатра и забота о младенце</string>
+    <string name="item_card_subscription_descr">Пакеты консультаций по выгодным ценам</string>
+    <string name="item_card_subscription_title">Варианты подписки</string>
+    <string name="title_lectures">Лекции и вебинары</string>
+    <string name="get_doctor_consult">Получить консультацию врача</string>
+
+    <string name="facebook_app_id">1594555937316066</string>
+    <string name="login_by_phone">По номеру телефона</string>
+    <string name="login_register">Зарегистрируйтесь</string>
+    <string name="login_or_social">или через соцсети</string>
+    <string name="login_already_registered">Уже зарегистрированы?</string>
+    <string name="login_please">Войдите</string>
+    <string name="cont_descr_login_vk">Login vk</string>
+    <string name="main_title_specs">Наши специалисты</string>
+    <string name="main_stat_doctor_count">количество \nврачей</string>
+    <string name="main_stat_quali">средний стаж \nврачей</string>
+    <string name="main_stat_rating">средняя оценка</string>
+    <string name="main_stat_temp1">1 345</string>
+    <string name="main_stat_temp2">10 лет</string>
+    <string name="main_stat_temp3">4,5</string>
+    <string name="fav_doctors_descr">Врачи, к которым вы наиболее часто общались</string>
+    <string name="fav_doctors_title">Любимые врачи</string>
+    <string name="add_medcard">+ Добавить медкарту</string>
+    <string name="med_card_text1">Это необходимо что бы врачи могли более объективно смотреть на клиническую картину и ставить более точные диагнозы</string>
+    <string name="med_card_text2">Изменить фото</string>
+    <string name="med_card_text3">Личные данные</string>
+    <string name="med_card_text4">Фамилия</string>
+    <string name="med_card_text5">Имя</string>
+    <string name="med_card_text6">Отчество</string>
+    <string name="med_card_text7">Номер телефона</string>
+    <string name="med_card_text8">Номер телефона для экстренной связи</string>
+    <string name="med_card_text9">Дата рождения</string>
+    <string name="med_card_text10">Дополнительная информация</string>
+    <string name="med_card_text11">Информация желательная для заполнения, для уточнения диагнозов</string>
+    <string name="med_card_text12">Рост</string>
+    <string name="med_card_text13">см.</string>
+    <string name="med_card_text14">Вес</string>
+    <string name="med_card_text15">кг.</string>
+    <string name="med_card_text16">Норма питьевой воды в сутки, л.</string>
+    <string name="med_card_text17">Норма сна в сутки, ч.</string>
+    <string name="med_card_text18">Занятия спортом</string>
+    <string name="med_card_text19">Цель по шагам в сутки</string>
+    <string name="med_card_text20">Кол-во шагов</string>
+    <string name="med_card_text21">Имеющиеся заболевания</string>
+    <string name="med_card_text22">Ваши заболевания, если они есть</string>
+    <string name="med_card_23">Продолжить</string>
+    <string name="get_consult">Получить консультацию</string>
+    <string name="about_doctor">О враче</string>
+
+    <string name="settings_text_1">Учетная запись</string>
+    <string name="settings_text_2">Наши врачи</string>
+    <string name="settings_text_8">Поддержка</string>
+    <string name="settings_text_9">Юридическая информация</string>
+    <string name="legal">Suspendisse at venenatis enim. Integer vehicula tempor suscipit. Aenean quis ligula diam. Mauris a velit a urna lobortis auctor vitae et lectus. Sed ut orci ac eros fringilla viverra. Nam euismod mattis tellus, id fringilla lacus mattis et. Morbi eu ligula a quam rutrum pharetra. Ut rhoncus tristique ligula, a aliquet nunc efficitur quis. Sed rutrum purus nisi, vitae eleifend odio hendrerit sit amet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean ut dolor non metus condimentum finibus. Vivamus pretium ligula ac hendrerit ornare. Nullam quis gravida nibh, eu dictum tellus. Fusce malesuada non tellus ac ullamcorper. Donec nisl dui, porta vitae pharetra eget, tristique ac erat. Nullam efficitur ligula urna, eget fermentum lacus posuere sed.  Nullam tellus tortor, varius sed vestibulum sit amet, tempor id lorem. Phasellus lectus lectus, sollicitudin iaculis felis vitae, malesuada efficitur est. Vivamus ornare, felis eu sagittis maximus, diam ipsum mattis lorem, eu consequat velit ligula sed felis. Curabitur aliquet rhoncus justo vitae placerat. Sed feugiat consectetur diam vel gravida. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus sit amet mi non risus hendrerit ornare facilisis non purus. Nullam fringilla justo ut ipsum consequat vehicula. Fusce tortor est, vehicula a magna et, suscipit auctor justo.  Fusce placerat justo lorem, quis lobortis neque ultricies id. Duis porttitor blandit vulputate. Donec sollicitudin sem nisl, eget malesuada lorem tempor at. In placerat nulla at est scelerisque, eget consectetur libero sodales. Fusce sem felis, gravida vel mattis eu, pulvinar sit amet purus. Nam ac magna egestas, tristique justo eget, imperdiet sapien. Etiam ut ornare risus, at dapibus metus. Maecenas vel neque dignissim, congue nulla ac, feugiat quam. Aenean ac arcu eu nunc porttitor commodo ut a odio. Donec fermentum, enim sit amet pulvinar ornare, elit risus hendrerit urna, nec malesuada dolor nibh nec nisl. Donec at aliquam lectus. Donec ornare laoreet leo, a cursus ipsum condimentum id.</string>
+    <string name="ask_question">Задать вопрос</string>
+    <string name="your_question">Ваш вопрос</string>
+    <string name="your_email">Ваш email</string>
+    <string name="ask_question_header">Задайте нам вопрос</string>
+
+    <string name="planning_descr">Консультации врачей по проблемам планированя беременности</string>
+    <string name="planning_title">Планирование беременности</string>
+    <string name="settings_additional_info_header">Дополнительная информация</string>
+    <string name="settings_header">Настройки приложения</string>
+    <string name="promo_calendar_text1">Мы еще работаем</string>
+    <string name="promo_caldendar_text2">Мы еще не успели добавить эту функцию, но скоро она будет доступна!</string>
+</resources>

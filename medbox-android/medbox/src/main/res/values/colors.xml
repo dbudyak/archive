@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#949494</color>
+    <color name="colorAccent">#409cff</color>
+    <color name="colorAccentDark">#808080</color>
+    <color name="default_bg">#F7FBFF</color>
+
+    <color name="black_overlay">#66000000</color>
+
+    <color name="sky_blue">#5ab2f6</color>
+    <color name="dark_sky_blue">#2c76de</color>
+    <color name="title_small_color">#3a4a5a</color>
+    <color name="title_large_color">#304760</color>
+</resources>

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="handler"
+            type="ru.medbox.ui.handler.MedcardHandler" />
+
+        <variable
+            name="viewModel"
+            type="ru.medbox.ui.viewmodel.MedcardViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/general_side_margin"
+        android:paddingRight="@dimen/general_side_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/main_toolbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:needBack="@{true}"
+                app:title="@{@string/title_add_medcard}" />
+
+            <TextView
+                style="@style/MedCardSimpleText"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/med_card_text1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/input_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/woman" />
+
+                <TextView
+                    android:id="@+id/input_change_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="21dp"
+                    android:text="@string/med_card_text2"
+                    android:textAlignment="center"
+                    android:textColor="#3c8be6"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/gotham_bold"
+                android:text="@string/med_card_text3"
+                android:textColor="#3a4a5a"
+                android:textSize="16sp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_lastname_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/input_lastname"
+                    style="@style/MedCardEditText"
+                    android:layout_marginTop="40dp"
+                    android:hint="@string/med_card_text4" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_first_name_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/input_first_name"
+                    style="@style/MedCardEditText"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/med_card_text5"
+                    app:mutableText="@{viewModel.firstName}" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_middle_name_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/input_middle_name"
+                    style="@style/MedCardEditText"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/med_card_text6" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_tel_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/input_tel"
+                    style="@style/MedCardEditText"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/med_card_text7"
+                    android:inputType="phone" />
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                style="@style/MedCardSimpleText"
+                android:layout_marginTop="10dp"
+                android:text="@string/med_card_text8" />
+
+            <TextView
+                android:id="@+id/key_bday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:layout_marginBottom="15dp"
+                android:text="@string/med_card_text9"
+                android:textColor="#3a4a5a"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3">
+
+                <Spinner
+                    android:id="@+id/input_bday_day"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/spinner_bg" />
+
+                <Spinner
+                    android:id="@+id/input_bday_month"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/spinner_bg" />
+
+                <Spinner
+                    android:id="@+id/input_bday_year"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/spinner_bg" />
+
+            </LinearLayout>
+
+            <android.support.v7.widget.CardView
+                style="@style/ItemCard"
+                android:layout_marginTop="29dp"
+                android:animateLayoutChanges="true"
+                android:paddingBottom="14dp"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="4dp">
+
+                <android.support.constraint.ConstraintLayout
+                    style="@style/ItemCardChild"
+                    android:animateLayoutChanges="true"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <TextView
+                        android:id="@+id/title_additional"
+                        style="@style/MedCardSimpleText2"
+                        android:text="@string/med_card_text10"
+                        app:layout_constraintEnd_toStartOf="@+id/btn_expand_medcard"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/title_additional_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/open_sans"
+                        android:lineSpacingExtra="4sp"
+                        android:text="@string/med_card_text11"
+                        android:textColor="#737373"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toStartOf="@+id/btn_expand_medcard"
+                        app:layout_constraintStart_toStartOf="@+id/title_additional"
+                        app:layout_constraintTop_toBottomOf="@+id/title_additional" />
+
+                    <ImageView
+                        android:id="@+id/btn_expand_medcard"
+                        style="@style/ItemCardArrowRight"
+                        android:layout_margin="16dp"
+                        android:src="@drawable/arrow_vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <include
+                        android:id="@+id/expandable"
+                        layout="@layout/medcard_additional"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/title_additional_text" />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:id="@+id/continue_btn"
+                style="@style/BlueBtn"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="14dp"
+                android:text="@string/med_card_23" />
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="handler"
+            type="ru.medbox.ui.handler.MainEventHandler" />
+
+        <variable
+            name="viewModel"
+            type="ru.medbox.ui.viewmodel.SpecializationListViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_clouds"
+            android:paddingLeft="@dimen/general_side_margin"
+            android:paddingTop="16dp"
+            android:paddingRight="@dimen/general_side_margin">
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/main_toolbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:needBack="@{false}"
+                app:title="@{@string/title_main}" />
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/item_card_1"
+                style="@style/ItemCard"
+                android:onClick="@{() -> handler.onPlanningClick()}"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/card_elevation"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                <android.support.constraint.ConstraintLayout style="@style/ItemCardChild">
+
+                    <ImageView
+                        android:id="@+id/item_card_icon_1"
+                        style="@style/ItemCardIcon"
+                        android:src="@drawable/item_card_icon_1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/item_card_title_1"
+                        style="@style/ItemCardTitle"
+                        android:text="@string/item_card_1_title"
+                        app:layout_constraintBottom_toTopOf="@+id/item_card_descr_1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/item_card_icon_1"
+                        app:layout_constraintTop_toTopOf="@+id/item_card_icon_1"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <TextView
+                        android:id="@+id/item_card_descr_1"
+                        style="@style/ItemCardDescr"
+                        android:text="@string/item_card_1_descr"
+                        app:layout_constraintBottom_toBottomOf="@+id/item_card_icon_1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/item_card_icon_1"
+                        app:layout_constraintTop_toBottomOf="@+id/item_card_title_1" />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/item_card_2"
+                style="@style/ItemCard"
+                android:layout_marginTop="@dimen/item_card_margin_top"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/card_elevation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_card_1">
+
+                <android.support.constraint.ConstraintLayout style="@style/ItemCardChild">
+
+                    <ImageView
+                        android:id="@+id/item_card_icon_2"
+                        style="@style/ItemCardIcon"
+                        android:src="@drawable/item_card_icon_2"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/item_card_title_2"
+                        style="@style/ItemCardTitle"
+                        android:text="@string/item_card_2_title"
+                        app:layout_constraintBottom_toTopOf="@+id/item_card_descr_2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/item_card_icon_2"
+                        app:layout_constraintTop_toTopOf="@+id/item_card_icon_2"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <TextView
+                        android:id="@+id/item_card_descr_2"
+                        style="@style/ItemCardDescr"
+                        android:text="@string/item_card_2_descr"
+                        app:layout_constraintBottom_toBottomOf="@+id/item_card_icon_2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/item_card_icon_2"
+                        app:layout_constraintTop_toBottomOf="@+id/item_card_title_2" />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/item_card_3"
+                style="@style/ItemCard"
+                android:layout_marginTop="@dimen/item_card_margin_top"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/card_elevation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_card_2">
+
+                <android.support.constraint.ConstraintLayout style="@style/ItemCardChild">
+
+                    <ImageView
+                        android:id="@+id/item_card_icon_3"
+                        style="@style/ItemCardIcon"
+                        android:src="@drawable/item_card_icon_3"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/item_card_title_3"
+                        style="@style/ItemCardTitle"
+                        android:text="@string/item_card_3_title"
+                        app:layout_constraintBottom_toTopOf="@+id/item_card_descr_3"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/item_card_icon_3"
+                        app:layout_constraintTop_toTopOf="@+id/item_card_icon_3"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <TextView
+                        android:id="@+id/item_card_descr_3"
+                        style="@style/ItemCardDescr"
+                        android:text="@string/item_card_3_descr"
+                        app:layout_constraintBottom_toBottomOf="@+id/item_card_icon_3"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/item_card_icon_3"
+                        app:layout_constraintTop_toBottomOf="@+id/item_card_title_3" />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/item_card_subscription"
+                style="@style/ItemCard"
+                android:layout_marginTop="50dp"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/card_elevation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_card_3">
+
+                <android.support.constraint.ConstraintLayout
+                    style="@style/ItemCardChild"
+                    android:background="@drawable/item_card_subscription_bg">
+
+                    <TextView
+                        android:id="@+id/item_card_title_subscription"
+                        style="@style/ItemCardTitle"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/item_card_subscription_title"
+                        android:textColor="@android:color/white"
+                        app:layout_constraintBottom_toTopOf="@+id/item_card_descr_subscription"
+                        app:layout_constraintEnd_toStartOf="@+id/item_card_subscr_arrow"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <TextView
+                        android:id="@+id/item_card_descr_subscription"
+                        style="@style/ItemCardDescr"
+                        android:layout_marginEnd="8dp"
+                        android:fontFamily="@font/open_sans"
+                        android:lineSpacingExtra="0sp"
+                        android:text="@string/item_card_subscription_descr"
+                        android:textColor="@android:color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/item_card_subscr_arrow"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/item_card_subscr_arrow"
+                        style="@style/ItemCardArrowRight"
+                        android:src="@drawable/arrow_main"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:id="@+id/main_specs"
+                style="@style/SomeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/main_title_specs"
+                app:layout_constraintEnd_toEndOf="@+id/item_card_subscription"
+                app:layout_constraintStart_toStartOf="@+id/item_card_subscription"
+                app:layout_constraintTop_toBottomOf="@+id/item_card_subscription" />
+
+            <TableLayout
+                android:id="@+id/main_stat_table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:stretchColumns="*"
+                app:layout_constraintEnd_toEndOf="@+id/main_specs"
+                app:layout_constraintStart_toStartOf="@+id/main_specs"
+                app:layout_constraintTop_toBottomOf="@+id/main_specs">
+
+                <TableRow>
+
+                    <ImageView
+                        style="@style/MainStatImage"
+                        android:src="@drawable/doctor_count" />
+
+                    <ImageView
+                        style="@style/MainStatImage"
+                        android:src="@drawable/qualification" />
+
+                    <ImageView
+                        style="@style/MainStatImage"
+                        android:src="@drawable/rating" />
+                </TableRow>
+
+                <TableRow android:paddingTop="10dp">
+
+                    <TextView
+                        style="@style/MainStatText"
+                        android:text="@string/main_stat_temp1" />
+
+                    <TextView
+                        style="@style/MainStatText"
+                        android:text="@string/main_stat_temp2" />
+
+                    <TextView
+                        style="@style/MainStatText"
+                        android:text="@string/main_stat_temp3" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/MainStatText2"
+                        android:text="@string/main_stat_doctor_count" />
+
+                    <TextView
+                        style="@style/MainStatText2"
+                        android:text="@string/main_stat_quali" />
+
+                    <TextView
+                        style="@style/MainStatText2"
+                        android:text="@string/main_stat_rating" />
+                </TableRow>
+            </TableLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/specialists"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="29dp"
+                app:adapter="@{viewModel.adapter}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/main_stat_table"
+                app:layout_constraintStart_toStartOf="@+id/main_stat_table"
+                app:layout_constraintTop_toBottomOf="@+id/main_stat_table" />
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+</layout>

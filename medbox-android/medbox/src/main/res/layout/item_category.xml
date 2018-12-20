@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="ru.medbox.ui.viewmodel.CategoryItemViewModel" />
+
+        <variable
+            name="handler"
+            type="ru.medbox.ui.handler.SalutaryEventHandler" />
+
+        <variable
+            name="category"
+            type="ru.medbox.db.model.Category" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{() -> handler.onCategoryClick(category)}">
+
+        <LinearLayout
+            android:id="@+id/separator"
+            style="@style/ListItemSeparator"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/CategoryTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            app:layout_constraintBottom_toTopOf="@+id/description"
+            app:layout_constraintEnd_toStartOf="@+id/salutary_more_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:mutableText="@{viewModel.getTitle()}" />
+
+        <TextView
+            android:id="@+id/description"
+            style="@style/CategoryDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility='@{viewModel.getDescription().equals("") ? View.GONE : View.VISIBLE}'
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/salutary_more_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:mutableText="@{viewModel.getDescription()}" />
+
+        <ImageView
+            android:id="@+id/salutary_more_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:src="@drawable/arrow_2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

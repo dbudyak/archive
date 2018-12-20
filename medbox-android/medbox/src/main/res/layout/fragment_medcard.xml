@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="handler"
+            type="ru.medbox.ui.handler.MedcardHandler" />
+
+        <variable
+            name="doctorsViewModel"
+            type="ru.medbox.ui.viewmodel.DoctorListViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/general_side_margin"
+        android:background="@drawable/bg_clouds_top"
+        android:paddingRight="@dimen/general_side_margin"
+        tools:ignore="RtlSymmetry">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/main_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:needBack="@{false}"
+            app:title="@{@string/title_medcard}" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/med_cards"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <Button
+            android:id="@+id/button_add_card"
+            style="@style/ButtonGray"
+            android:onClick="@{() -> handler.onAddMedcardClick()}"
+            android:text="@string/add_medcard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/med_cards" />
+
+        <TextView
+            android:id="@+id/fav_doctor_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/gotham_bold"
+            android:text="@string/fav_doctors_title"
+            android:textColor="#3a4a5a"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/button_add_card"
+            app:layout_constraintTop_toBottomOf="@+id/button_add_card" />
+
+        <TextView
+            android:id="@+id/fav_doctor_title_descr"
+            style="@style/MedCardSimpleText"
+            android:layout_marginTop="3dp"
+            android:fontFamily="@font/open_sans"
+            android:text="@string/fav_doctors_descr"
+            app:layout_constraintStart_toStartOf="@+id/fav_doctor_title"
+            app:layout_constraintTop_toBottomOf="@+id/fav_doctor_title" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/fav_doctors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:adapter="@{doctorsViewModel.adapter}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/fav_doctor_title_descr"
+            app:layout_constraintTop_toBottomOf="@+id/fav_doctor_title_descr" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

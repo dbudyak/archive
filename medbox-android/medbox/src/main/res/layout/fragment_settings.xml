@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="handler"
+            type="ru.medbox.ui.handler.SettingsHandler" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/general_side_margin"
+        android:paddingRight="@dimen/general_side_margin"
+        tools:ignore="RtlSymmetry">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/main_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="16dp"
+            app:needBack="@{false}"
+            app:title="@{@string/title_settings}" />
+
+        <TextView
+            style="@style/SettingsHeader"
+            android:text="@string/settings_header" />
+
+        <LinearLayout style="@style/ListItemSeparator" />
+
+        <TextView
+            style="@style/SettingsTextItem"
+            android:drawableStart="@drawable/settings_1"
+            android:onClick="@{() -> handler.onAccount()}"
+            android:text="@string/settings_text_1" />
+
+        <LinearLayout style="@style/ListItemSeparator" />
+
+        <TextView
+            style="@style/SettingsTextItem"
+            android:drawableStart="@drawable/settings_2"
+            android:onClick="@{() -> handler.onOurDoctors()}"
+            android:text="@string/settings_text_2" />
+
+        <TextView
+            style="@style/SettingsHeader"
+            android:text="@string/settings_additional_info_header" />
+
+        <LinearLayout style="@style/ListItemSeparator" />
+
+        <TextView
+            style="@style/SettingsTextItem"
+            android:drawableStart="@drawable/settings_8"
+            android:onClick="@{() -> handler.onSupport()}"
+            android:text="@string/settings_text_8" />
+
+        <LinearLayout style="@style/ListItemSeparator" />
+
+        <TextView
+            style="@style/SettingsTextItem"
+            android:drawableStart="@drawable/settings_9"
+            android:onClick="@{() -> handler.onLegal()}"
+            android:text="@string/settings_text_9" />
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+        <import type="ru.medbox.ui.BaseActivity" />
+
+        <variable
+            name="title"
+            type="java.lang.String" />
+
+        <variable
+            name="needBack"
+            type="boolean" />
+    </data>
+
+    <android.support.v7.widget.Toolbar
+        style="@style/ToolbarStyle"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:layout_collapseMode="pin"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background_transparent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gotham_bold"
+                android:textAlignment="center"
+                android:text="@{title}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:needBack="@{needBack}" />
+
+            <ImageView
+                android:id="@+id/btn_back"
+                style="@style/TitleImageSmall"
+                android:padding="@dimen/general_side_margin"
+                android:src="@drawable/back"
+                android:onClick="@{(v) -> ((BaseActivity) v.context).finish()}"
+                android:elevation="5dp"
+                android:visibility="@{needBack ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.Toolbar>
+</layout>
