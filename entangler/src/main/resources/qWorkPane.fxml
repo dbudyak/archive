@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="800"
+            prefWidth="1280" xmlns="http://javafx.com/javafx/8">
+    <top>
+        <HBox alignment="CENTER_RIGHT">
+            <padding>
+                <Insets top="10" right="20" bottom="10" left="20"/>
+            </padding>
+            <Button id="mainBtnGrid" prefWidth="180" prefHeight="20" text="Показать сетку"/>
+            <Button id="mainBtnRotate" prefWidth="180" prefHeight="20" text="Повернуть схему"/>
+            <Button id="mainBtnGraph" prefWidth="180" prefHeight="20" text="Показать граф"/>
+            <Button id="mainBtnStart" prefWidth="180" prefHeight="20" text="Запустить эмуляцию"/>
+        </HBox>
+    </top>
+    <left>
+        <fx:include source="qStuff.fxml"/>
+    </left>
+    <center>
+        <fx:include source="qCircuit.fxml"/>
+    </center>
+</BorderPane>

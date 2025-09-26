@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import ru.dbudyak.entangler.QCircuit?>
+<?import javafx.geometry.Insets?>
+<TitledPane xmlns:fx="http://javafx.com/fxml/1" animated="false" collapsible="false" minHeight="-Infinity" minWidth="-Infinity"
+            alignment="TOP_CENTER" text="Схема 1" xmlns="http://javafx.com/javafx/8" prefHeight="760"
+            prefWidth="1000">
+    <content>
+        <ScrollPane hbarPolicy="ALWAYS" vbarPolicy="ALWAYS" prefWidth="2000"
+                >
+            <content>
+                <fx:include source="qCircuitGrid.fxml"/>
+            </content>
+        </ScrollPane>
+    </content>
+</TitledPane>

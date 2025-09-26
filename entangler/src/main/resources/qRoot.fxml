@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" id="root" fx:id="qRoot" maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity"
+            minWidth="-Infinity" xmlns="http://javafx.com/javafx/8">
+    <top>
+        <fx:include source="qMenu.fxml"/>
+    </top>
+    <center>
+        <fx:include source="qWorkPane.fxml"/>
+    </center>
+</BorderPane>
+
+

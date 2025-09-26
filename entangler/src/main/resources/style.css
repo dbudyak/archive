@@ -1,0 +1,46 @@
+#qCircuitElement {
+    -fx-border-style: dotted;
+    -fx-border-width: 4;
+    -fx-border-radius: 5;
+    -fx-border-color: yellow;
+}
+
+#qElementsGrid {
+    -fx-padding: 10 0 10 0;
+}
+
+#qWavesGrid {
+    -fx-padding: 10 0 10 0;
+
+}
+
+#circuit {
+    -fx-alignment: top-center;
+    -fx-background-color: #FFFFFF;
+}
+
+#elScroll {
+    -fx-background-color: #FFFFFF;
+    -fx-alignment: top-center;
+}
+
+#stuffTitleds {
+    -fx-background-color: #FFFFFF;
+}
+
+#qWavesGrid .qelement {
+    -fx-effect: dropshadow(gaussian, #BBBBBB, 2, 2.0, 2.5, 2.5);
+    -fx-padding: 5 5 5 5;
+}
+
+#qElementsGrid .qelement {
+    -fx-effect: dropshadow(gaussian, #BBBBBB, 2, 1.5, 2.5, 2.5);
+    -fx-padding: 5 5 5 5;
+}
+
+#accordion {
+}
+
+#root {
+    -fx-background-color: #DDDDDD;
+}

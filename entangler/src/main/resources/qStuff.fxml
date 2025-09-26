@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+
+<?import ru.dbudyak.entangler.QElement?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700"
+            prefWidth="240" xmlns="http://javafx.com/javafx/8">
+    <top>
+        <Accordion id="accordion" minHeight="-Infinity" minWidth="-Infinity " prefHeight="300" prefWidth="240">
+            <padding>
+                <Insets bottom="0" left="20" right="20" top="0"/>
+            </padding>
+            <panes>
+                <TitledPane id="stuffTitleds" animated="true" expanded="true" prefHeight="300" prefWidth="220"
+                            text="Оптические элементы">
+                    <content>
+                        <ScrollPane id="elScroll" hbarPolicy="NEVER" prefHeight="300" prefWidth="220"
+                                    vbarPolicy="AS_NEEDED">
+                            <content>
+                                <GridPane id="qElementsGrid" cache="true" gridLinesVisible="false" hgap="10"
+                                          prefWidth="200" vgap="10">
+                                    <children>
+                                        <QElement id="elBS" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                                        <QElement id="elMirror" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                                        <QElement id="elDetector" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                                        <QElement id="elSource" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                                    </children>
+
+                                </GridPane>
+                            </content>
+                        </ScrollPane>
+                    </content>
+                </TitledPane>
+                <TitledPane id="stuffTitleds" animated="true" prefHeight="300" prefWidth="220" text="Волновод">
+                    <content>
+                        <ScrollPane id="elScroll" hbarPolicy="NEVER" prefHeight="300" prefWidth="220"
+                                    vbarPolicy="AS_NEEDED">
+                            <content>
+                                <GridPane id="qWavesGrid" gridLinesVisible="false" hgap="10" prefWidth="200" vgap="10">
+                                    <children>
+                                        <!-- <QElement id="wud00" GridPane.columnIndex="0" GridPane.rowIndex="0"></QElement>-->
+                                        <QElement id="wlr00" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                                    </children>
+
+                                    <!-- <QElement id="wlr10" GridPane.columnIndex="0" GridPane.rowIndex="1"></QElement>
+                                     <QElement id="wlr01" GridPane.columnIndex="1" GridPane.rowIndex="1"></QElement>
+                                     <QElement id="wud10" GridPane.columnIndex="0" GridPane.rowIndex="2"></QElement>
+                                     <QElement id="wud01" GridPane.columnIndex="1" GridPane.rowIndex="2"></QElement>
+                                     <QElement id="wld00" GridPane.columnIndex="0" GridPane.rowIndex="3"></QElement>
+                                     <QElement id="wld01" GridPane.columnIndex="1" GridPane.rowIndex="3"></QElement>
+                                     <QElement id="wld10" GridPane.columnIndex="0" GridPane.rowIndex="4"></QElement>
+                                     <QElement id="wlu00" GridPane.columnIndex="1" GridPane.rowIndex="4"></QElement>
+                                     <QElement id="wlu01" GridPane.columnIndex="0" GridPane.rowIndex="5"></QElement>
+                                     <QElement id="wlu10" GridPane.columnIndex="1" GridPane.rowIndex="5"></QElement>
+                                     <QElement id="wrd00" GridPane.columnIndex="0" GridPane.rowIndex="6"></QElement>
+                                     <QElement id="wrd01" GridPane.columnIndex="1" GridPane.rowIndex="6"></QElement>
+                                     <QElement id="wrd10" GridPane.columnIndex="0" GridPane.rowIndex="7"></QElement>
+                                     <QElement id="wru00" GridPane.columnIndex="1" GridPane.rowIndex="7"></QElement>
+                                     <QElement id="wru01" GridPane.columnIndex="0" GridPane.rowIndex="8"></QElement>
+                                     <QElement id="wru10" GridPane.columnIndex="1" GridPane.rowIndex="8"></QElement>-->
+                                </GridPane>
+                            </content>
+                        </ScrollPane>
+                    </content>
+                </TitledPane>
+            </panes>
+        </Accordion>
+    </top>
+    <bottom>
+        <AnchorPane id="props" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="240.0" visible="false"
+                    BorderPane.alignment="CENTER">
+            <children>
+                <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                         prefHeight="400.0" prefWidth="240.0" tabClosingPolicy="UNAVAILABLE">
+
+                    <padding>
+                        <Insets bottom="0" left="20" right="20" top="0"/>
+                    </padding>
+                    <tabs>
+                        <Tab text="Свойства">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="200.0">
+                                    <children>
+                                        <HBox layoutX="3.0" layoutY="5.0" prefHeight="400.0" prefWidth="200.0">
+                                            <children>
+                                                <ListView id="propKeysList" prefHeight="400.0" prefWidth="80.0"/>
+                                                <ListView id="propValuesList" prefHeight="200.0" prefWidth="120.0"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Actions">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="200.0">
+                                    <children>
+                                        <VBox alignment="BASELINE_CENTER" prefHeight="400.0" prefWidth="200.0">
+                                            <children>
+                                                <Button id="propBtnRotate" mnemonicParsing="false" text="Повернуть"
+                                                        prefWidth="150">
+                                                    <padding>
+                                                        <Insets bottom="5.0" left="20.0" right="20.0" top="5.0"/>
+                                                    </padding>
+                                                </Button>
+                                                <Button id="propBtnDelete" alignment="BASELINE_CENTER" prefWidth="150"
+                                                        mnemonicParsing="false" text="Удалить">
+                                                    <padding>
+                                                        <Insets bottom="5.0" left="20.0" right="20.0" top="5.0"/>
+                                                    </padding>
+                                                </Button>
+                                                <Button id="propBtnFlip" alignment="BASELINE_CENTER" prefWidth="150"
+                                                        mnemonicParsing="false" text="Инвертировать">
+                                                    <padding>
+                                                        <Insets bottom="5.0" left="20.0" right="20.0" top="5.0"/>
+                                                    </padding>
+                                                </Button>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+            </children>
+        </AnchorPane>
+    </bottom>
+</BorderPane>

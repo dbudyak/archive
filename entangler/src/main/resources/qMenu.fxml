@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<MenuBar prefWidth="200.0" xmlns="http://javafx.com/javafx/8">
+    <menus>
+        <Menu mnemonicParsing="false" text="Файл">
+            <items>
+                <MenuItem mnemonicParsing="false" text="Создать"/>
+            </items>
+            <items>
+                <MenuItem mnemonicParsing="false" text="Открыть"/>
+            </items>
+            <items>
+                <MenuItem mnemonicParsing="false" text="Сохранить"/>
+            </items>
+            <items>
+                <MenuItem mnemonicParsing="false" text="Закрыть"/>
+            </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Редактирование">
+            <items>
+                <MenuItem mnemonicParsing="false" text="Отменить"/>
+            </items>
+            <items>
+                <MenuItem mnemonicParsing="false" text="Повторить"/>
+            </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Вид">
+            <items>
+                <MenuItem mnemonicParsing="false" text="Повернуть схему"/>
+            </items>
+            <items>
+                <MenuItem mnemonicParsing="false" text="Показать панель"/>
+            </items>
+            <items>
+                <MenuItem mnemonicParsing="false" text="Показать сетку"/>
+            </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Выполнить">
+            <items>
+                <MenuItem mnemonicParsing="false" text="Запустить эмуляцию"/>
+            </items>
+            <items>
+                <MenuItem mnemonicParsing="false" text="Отладка"/>
+            </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Инструменты">
+            <items>
+                <MenuItem mnemonicParsing="false" text="Показать граф"/>
+            </items>
+            <SeparatorMenuItem></SeparatorMenuItem>
+            <items>
+                <MenuItem mnemonicParsing="false" text="Собрать элемент"/>
+            </items>
+            <items>
+                <MenuItem mnemonicParsing="false" text="Разобрать элемент"/>
+            </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Отчет">
+            <items>
+                <MenuItem mnemonicParsing="false" text="Сгенерировать"/>
+            </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Окно">
+            <items>
+                <MenuItem mnemonicParsing="false" text="Схема 1"/>
+            </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Справка">
+        </Menu>
+    </menus>
+</MenuBar>
