@@ -18,7 +18,7 @@
             </padding>
             <panes>
                 <TitledPane id="stuffTitleds" animated="true" expanded="true" prefHeight="300" prefWidth="220"
-                            text="Оптические элементы">
+                            text="Optical Elements">
                     <content>
                         <ScrollPane id="elScroll" hbarPolicy="NEVER" prefHeight="300" prefWidth="220"
                                     vbarPolicy="AS_NEEDED">
@@ -37,7 +37,7 @@
                         </ScrollPane>
                     </content>
                 </TitledPane>
-                <TitledPane id="stuffTitleds" animated="true" prefHeight="300" prefWidth="220" text="Волновод">
+                <TitledPane id="stuffTitleds" animated="true" prefHeight="300" prefWidth="220" text="Waveguide">
                     <content>
                         <ScrollPane id="elScroll" hbarPolicy="NEVER" prefHeight="300" prefWidth="220"
                                     vbarPolicy="AS_NEEDED">
@@ -83,7 +83,7 @@
                         <Insets bottom="0" left="20" right="20" top="0"/>
                     </padding>
                     <tabs>
-                        <Tab text="Свойства">
+                        <Tab text="Properties">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="200.0">
                                     <children>
@@ -103,20 +103,20 @@
                                     <children>
                                         <VBox alignment="BASELINE_CENTER" prefHeight="400.0" prefWidth="200.0">
                                             <children>
-                                                <Button id="propBtnRotate" mnemonicParsing="false" text="Повернуть"
+                                                <Button id="propBtnRotate" mnemonicParsing="false" text="Rotate"
                                                         prefWidth="150">
                                                     <padding>
                                                         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0"/>
                                                     </padding>
                                                 </Button>
                                                 <Button id="propBtnDelete" alignment="BASELINE_CENTER" prefWidth="150"
-                                                        mnemonicParsing="false" text="Удалить">
+                                                        mnemonicParsing="false" text="Delete">
                                                     <padding>
                                                         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0"/>
                                                     </padding>
                                                 </Button>
                                                 <Button id="propBtnFlip" alignment="BASELINE_CENTER" prefWidth="150"
-                                                        mnemonicParsing="false" text="Инвертировать">
+                                                        mnemonicParsing="false" text="Invert">
                                                     <padding>
                                                         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0"/>
                                                     </padding>

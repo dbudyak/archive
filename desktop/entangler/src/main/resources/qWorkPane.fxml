@@ -13,10 +13,10 @@
             <padding>
                 <Insets top="10" right="20" bottom="10" left="20"/>
             </padding>
-            <Button id="mainBtnGrid" prefWidth="180" prefHeight="20" text="Показать сетку"/>
-            <Button id="mainBtnRotate" prefWidth="180" prefHeight="20" text="Повернуть схему"/>
-            <Button id="mainBtnGraph" prefWidth="180" prefHeight="20" text="Показать граф"/>
-            <Button id="mainBtnStart" prefWidth="180" prefHeight="20" text="Запустить эмуляцию"/>
+            <Button id="mainBtnGrid" prefWidth="180" prefHeight="20" text="Show Grid"/>
+            <Button id="mainBtnRotate" prefWidth="180" prefHeight="20" text="Rotate Circuit"/>
+            <Button id="mainBtnGraph" prefWidth="180" prefHeight="20" text="Show Graph"/>
+            <Button id="mainBtnStart" prefWidth="180" prefHeight="20" text="Start Simulation"/>
         </HBox>
     </top>
     <left>
