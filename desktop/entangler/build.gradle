@@ -1,8 +1,23 @@
-apply plugin: 'java'
-apply plugin: 'application'
-sourceCompatibility = 1.8
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+group = 'ru.dbudyak'
 version = '1.0'
-mainClassName = "ru.dbudyak.entangler.Main"
+sourceCompatibility = 17
+targetCompatibility = 17
+
+application {
+    mainClass = 'ru.dbudyak.entangler.Main'
+}
+
+javafx {
+    version = "21"
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
 sourceSets {
     main {
         java {
@@ -18,17 +33,25 @@ sourceSets {
         }
     }
 }
+
+tasks.withType(Copy).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
 jar {
     manifest {
         attributes 'Main-Class': 'ru.dbudyak.entangler.Main'
     }
 }
+
 repositories {
     mavenCentral()
 }
+
 dependencies {
-    compile "org.apache.commons:commons-math3:3.4.1",
-            "org.jgrapht:jgrapht:0.9.1",
-            "org.jgrapht:jgrapht-core:0.9.1",
-            "org.jgrapht:jgrapht-ext:0.9.1"
+    implementation "org.apache.commons:commons-math3:3.6.1"
+    implementation "org.jgrapht:jgrapht-core:0.9.1"
+    implementation "org.jgrapht:jgrapht-ext:0.9.1"
+    implementation "org.tinyjee.jgraphx:jgraphx:2.0.0.1"
+    implementation "jgraph:jgraph:5.13.0.0"
 }

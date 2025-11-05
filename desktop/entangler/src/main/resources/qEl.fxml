@@ -5,7 +5,6 @@
 
 <?import ru.dbudyak.entangler.QElement?>
 <?import ru.dbudyak.entangler.models.base.BaseElement?>
-<?import com.sun.javafx.scene.control.skin.SplitPaneSkin.Content?>
 <QElement xmlns:fx="http://javafx.com/fxml/1" id="qCircuitElement" fx:controller="ru.dbudyak.entangler.QElement" preserveRatio="true"
           smooth="true"
           cache="true" xmlns="http://javafx.com/javafx/8">
