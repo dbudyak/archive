@@ -56,6 +56,10 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
 
     @Override
     public void onDelete() {
+        // Remove from graph before clearing base
+        if (getBase() != null) {
+            GraphBuilder.getInstance().getGraph().removeVertex(QElement.this);
+        }
         setOnHover();
         addEventHandler();
         setTag(null);
@@ -491,7 +495,24 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
             case SOURCE:
                 break;
             case DETECTOR:
-                getPropertiesWorker().setResult("Complete");
+                // Calculate detection probability
+                if (inData != null && !inData.isEmptyChannel1()) {
+                    RealMatrix detectorInput = inData.getChannel1();
+                    // Calculate probability as |amplitude|^2
+                    double probability = 0.0;
+                    for (int i = 0; i < detectorInput.getRowDimension(); i++) {
+                        for (int j = 0; j < detectorInput.getColumnDimension(); j++) {
+                            double amplitude = detectorInput.getEntry(i, j);
+                            probability += amplitude * amplitude;
+                        }
+                    }
+                    print("DETECTOR", "Detection probability: " + probability);
+                    getPropertiesWorker().setResult(String.format("%.4f", probability));
+                    getPropertiesWorker().setDetectorCounts();
+                } else {
+                    print("DETECTOR", "No input data");
+                    getPropertiesWorker().setResult("0.0000");
+                }
                 break;
             case PHASE_SHIFTER:
                 break;
@@ -549,6 +570,54 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
         return (QElement) super.clone();
     }
 
+    private void initializeSideDirections(BaseElement.ElementType elementType) {
+        switch (elementType) {
+            case SOURCE:
+                // Source outputs light
+                getSideLeft().setDirection(Side.Direction.OUTPUT);
+                getSideTop().setDirection(Side.Direction.OUTPUT);
+                getSideRight().setDirection(Side.Direction.OUTPUT);
+                getSideBbottom().setDirection(Side.Direction.OUTPUT);
+                break;
+            case DETECTOR:
+                // Detector receives light
+                getSideLeft().setDirection(Side.Direction.INPUT);
+                getSideTop().setDirection(Side.Direction.INPUT);
+                getSideRight().setDirection(Side.Direction.INPUT);
+                getSideBbottom().setDirection(Side.Direction.INPUT);
+                break;
+            case MIRROR:
+                // Mirror can input from one side and output from another
+                getSideLeft().setDirection(Side.Direction.INPUT);
+                getSideTop().setDirection(Side.Direction.INPUT);
+                getSideRight().setDirection(Side.Direction.OUTPUT);
+                getSideBbottom().setDirection(Side.Direction.OUTPUT);
+                break;
+            case BS:
+                // Beam splitter has two inputs and two outputs
+                getSideLeft().setDirection(Side.Direction.INPUT);
+                getSideTop().setDirection(Side.Direction.INPUT);
+                getSideRight().setDirection(Side.Direction.OUTPUT);
+                getSideBbottom().setDirection(Side.Direction.OUTPUT);
+                // Initialize default theta value for beam splitter
+                getPropertiesWorker().setBSTheta(Math.PI / 4); // 45 degrees
+                break;
+            case WAVEGUIDE:
+                // Waveguide passes light through
+                getSideLeft().setDirection(Side.Direction.INPUT);
+                getSideTop().setDirection(Side.Direction.INPUT);
+                getSideRight().setDirection(Side.Direction.OUTPUT);
+                getSideBbottom().setDirection(Side.Direction.OUTPUT);
+                break;
+            case PHASE_SHIFTER:
+                getSideLeft().setDirection(Side.Direction.INPUT);
+                getSideTop().setDirection(Side.Direction.INPUT);
+                getSideRight().setDirection(Side.Direction.OUTPUT);
+                getSideBbottom().setDirection(Side.Direction.OUTPUT);
+                break;
+        }
+    }
+
 
     private class QEventHandler implements EventHandler<DragEvent> {
         @Override
@@ -586,6 +655,12 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                     getPropertiesWorker().setType(getBase().getElementType());
                     getPropertiesWorker().setOnPropertiesListener(QElement.this);
                     getPropertiesWorker().setName(getBase().getElementType().name());
+
+                    // Initialize sides based on element type
+                    initializeSideDirections(elementType);
+
+                    // Add element to graph
+                    GraphBuilder.getInstance().getGraph().addVertex(QElement.this);
 
                     success = true;
                     setIO();

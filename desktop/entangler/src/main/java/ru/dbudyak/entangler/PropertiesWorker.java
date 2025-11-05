@@ -71,7 +71,7 @@ public class PropertiesWorker {
     }
 
     public void setDetectorCounts() {
-        data.put("Щелчки", "23");
+        data.put("Clicks", "measured");
     }
 
     public void setPropertiesVisibility(boolean visibility) {
@@ -79,11 +79,11 @@ public class PropertiesWorker {
     }
 
     public void setName(String name) {
-        data.put("Название", name);
+        data.put("Name", name);
     }
 
     public void setSourceOutputParam(double value) {
-        data.put("Мода", "cos(" + String.valueOf(value) + ")|0> + sin(" + String.valueOf(value) + ")|1>");
+        data.put("Mode", "cos(" + String.valueOf(value) + ")|0> + sin(" + String.valueOf(value) + ")|1>");
     }
 
     public void setBSTheta(double val) {
