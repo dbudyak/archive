@@ -783,7 +783,7 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                     setImage(Utils.INSTANCE.getImageByElId(id));
                     BaseElement.ElementType elementType = getElementType(id);
                     setBase(new BaseElement(elementType));
-                    setPw(PropertiesWorker.getInstance());
+                    setPw(PropertiesWorker.INSTANCE);
                     // Only set layout if not already set (first element)
                     if (getPropertiesWorker().getPropertiesAnchor() == null) {
                         getPropertiesWorker().setPropertiesLayout((AnchorPane) getScene().lookup("#props"));
