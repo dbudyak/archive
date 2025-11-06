@@ -304,7 +304,12 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 }
             }
             if (getElementRight().getSideLeft().isConnected() && getSideRight().isConnected()) {
-                GraphBuilder.getInstance().addEdge(getElementRight(), QElement.this);
+                // For BS, right side is channel1 output
+                if (getBase().getElementType() == BaseElement.ElementType.BS) {
+                    GraphBuilder.getInstance().addEdge(QElement.this, getElementRight(), 1);
+                } else {
+                    GraphBuilder.getInstance().addEdge(getElementRight(), QElement.this);
+                }
             } else {
                 GraphBuilder.getInstance().getGraph().removeEdge(getElementRight(), QElement.this);
             }
@@ -323,7 +328,12 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 }
             }
             if (getElementBottom().getSideTop().isConnected() && getSideBbottom().isConnected()) {
-                GraphBuilder.getInstance().addEdge(getElementBottom(), QElement.this);
+                // For BS, bottom side is channel2 output
+                if (getBase().getElementType() == BaseElement.ElementType.BS) {
+                    GraphBuilder.getInstance().addEdge(QElement.this, getElementBottom(), 2);
+                } else {
+                    GraphBuilder.getInstance().addEdge(getElementBottom(), QElement.this);
+                }
             } else {
                 GraphBuilder.getInstance().getGraph().removeEdge(getElementBottom(), QElement.this);
             }

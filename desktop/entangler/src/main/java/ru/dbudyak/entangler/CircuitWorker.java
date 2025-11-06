@@ -130,29 +130,52 @@ class CircuitWorker {
         private void detectors(ArrayList<QElement> endedSources) {
             for (QElement source : endedSources) {
                 detectors.stream().filter(detector -> graph.containsEdge(source, detector)).forEach(detector -> {
-                    print("DETECTOR", "checking data for " + source.getElementType().name() + " -> " + detector.getElementType().name() + " : " + detector.getTag());
+                    // Get edge weight to determine which channel to use
+                    Object edge = graph.getEdge(source, detector);
+                    double edgeWeight = graph.getEdgeWeight(edge);
+                    int channel = (int) Math.round(edgeWeight);
+
+                    print("DETECTOR", "checking data for " + source.getElementType().name() + " -> " + detector.getElementType().name() + " : " + detector.getTag() + " (channel " + channel + ")");
                     if (source.getOut() != null) {
                         if (source.isBS()) {
-                            if (!source.getOut().isEmptyChannel1()) {
-                                if (!source.getOut().isUsedChannel1()) {
+                            // Use edge weight to determine which channel
+                            if (channel == 1) {
+                                if (!source.getOut().isEmptyChannel1()) {
                                     detector.setIn(new Data.DataBuilder().channel1(source.getOut().getChannel1()).channel2(null).build());
-                                    source.getOut().setChannel1Used();
                                     detector.compute();
                                 } else {
-                                    if (!source.getOut().isEmptyChannel2()) {
-                                        if (!source.getOut().isUsedChannel2()) {
-                                            detector.setIn(new Data.DataBuilder().channel1(source.getOut().getChannel2()).channel2(null).build());
-                                            source.getOut().setChannel2isUsed();
-                                            detector.compute();
-                                        } else {
-                                            print("DETECTOR_ERR", "channels is used");
-                                        }
-                                    } else {
-                                        print("DETECTOR_ERR", "ch2 is empty");
-                                    }
+                                    print("DETECTOR_ERR", "ch1 is empty");
+                                }
+                            } else if (channel == 2) {
+                                if (!source.getOut().isEmptyChannel2()) {
+                                    detector.setIn(new Data.DataBuilder().channel1(source.getOut().getChannel2()).channel2(null).build());
+                                    detector.compute();
+                                } else {
+                                    print("DETECTOR_ERR", "ch2 is empty");
                                 }
                             } else {
-                                print("DETECTOR_ERR", "ch1 is empty");
+                                // Fallback: use old logic if no channel specified
+                                if (!source.getOut().isEmptyChannel1()) {
+                                    if (!source.getOut().isUsedChannel1()) {
+                                        detector.setIn(new Data.DataBuilder().channel1(source.getOut().getChannel1()).channel2(null).build());
+                                        source.getOut().setChannel1Used();
+                                        detector.compute();
+                                    } else {
+                                        if (!source.getOut().isEmptyChannel2()) {
+                                            if (!source.getOut().isUsedChannel2()) {
+                                                detector.setIn(new Data.DataBuilder().channel1(source.getOut().getChannel2()).channel2(null).build());
+                                                source.getOut().setChannel2isUsed();
+                                                detector.compute();
+                                            } else {
+                                                print("DETECTOR_ERR", "channels is used");
+                                            }
+                                        } else {
+                                            print("DETECTOR_ERR", "ch2 is empty");
+                                        }
+                                    }
+                                } else {
+                                    print("DETECTOR_ERR", "ch1 is empty");
+                                }
                             }
                         } else {
                             if (!source.getOut().isEmptyChannel1()) {
@@ -188,13 +211,18 @@ class CircuitWorker {
                     for (QElement el : vertexes) {
                         if (!el.marked) {
                             if (graph.containsEdge(current, el)) {
+                                // Get edge weight to determine which channel to route
+                                Object edge = graph.getEdge(current, el);
+                                double edgeWeight = graph.getEdgeWeight(edge);
+                                int channel = (int) Math.round(edgeWeight);
+
                                 if (el.isDetector()) {
                                     endedSources.add(current);
                                 } else {
                                     Data childInputData;
                                     Data parentOutputData = current.getOut();
                                     print("\n");
-                                    print(current.getElementType().name() + ":" + current.getTag() + " -> " + el.getElementType().name() + ":" + el.getTag());
+                                    print(current.getElementType().name() + ":" + current.getTag() + " -> " + el.getElementType().name() + ":" + el.getTag() + " (channel " + channel + ")");
                                     if (el.isBS()) {
                                         if (el.getIn() == null) {
                                             print("BS", "create new input data");
@@ -222,8 +250,21 @@ class CircuitWorker {
                                             }
                                         }
                                     } else {
-                                        childInputData = new Data.DataBuilder().channel2(null).channel1(null).build();
-                                        childInputData.setChannel1(parentOutputData.getChannel1());
+                                        // For BS outputs, route the correct channel based on edge weight
+                                        if (current.isBS()) {
+                                            childInputData = new Data.DataBuilder().channel2(null).channel1(null).build();
+                                            if (channel == 1) {
+                                                childInputData.setChannel1(parentOutputData.getChannel1());
+                                            } else if (channel == 2) {
+                                                childInputData.setChannel1(parentOutputData.getChannel2());
+                                            } else {
+                                                // Default to channel1 if no weight specified
+                                                childInputData.setChannel1(parentOutputData.getChannel1());
+                                            }
+                                        } else {
+                                            childInputData = new Data.DataBuilder().channel2(null).channel1(null).build();
+                                            childInputData.setChannel1(parentOutputData.getChannel1());
+                                        }
 
                                         el.setIn(childInputData);
                                         el.compute();

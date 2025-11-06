@@ -65,6 +65,19 @@ public class GraphBuilder {
         getGraph().addEdge(from, to);
     }
 
+    /**
+     * Add edge with channel information encoded as weight.
+     * @param from Source element
+     * @param to Destination element
+     * @param channel Channel number (1 or 2, use 0 for default)
+     */
+    public void addEdge(QElement from, QElement to, int channel) {
+        DefaultEdge edge = (DefaultEdge) getGraph().addEdge(from, to);
+        if (edge != null) {
+            getGraph().setEdgeWeight(edge, (double) channel);
+        }
+    }
+
     public void show() {
         SwingUtilities.invokeLater(() -> {
 
