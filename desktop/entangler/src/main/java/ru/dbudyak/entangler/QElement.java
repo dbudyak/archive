@@ -335,12 +335,18 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 }
             }
             if (getElementTop().getSideBbottom().isConnected() && getSideTop().isConnected()) {
-                // If top element is BS and its bottom side is output, this is channel2
-                if (getElementTop().getBase().getElementType() == BaseElement.ElementType.BS &&
-                    getElementTop().getSideBbottom().getDirection() == Side.Direction.OUTPUT) {
-                    GraphBuilder.getInstance().addEdge(getElementTop(), QElement.this, 2);
+                // Determine edge direction based on which side is OUTPUT
+                if (getSideTop().getDirection() == Side.Direction.OUTPUT) {
+                    // This element outputs TO top element
+                    GraphBuilder.getInstance().addEdge(QElement.this, getElementTop());
                 } else {
-                    GraphBuilder.getInstance().addEdge(getElementTop(), QElement.this);
+                    // Top element outputs TO this element (check if it's BS)
+                    if (getElementTop().getBase().getElementType() == BaseElement.ElementType.BS &&
+                        getElementTop().getSideBbottom().getDirection() == Side.Direction.OUTPUT) {
+                        GraphBuilder.getInstance().addEdge(getElementTop(), QElement.this, 2);
+                    } else {
+                        GraphBuilder.getInstance().addEdge(getElementTop(), QElement.this);
+                    }
                 }
             } else {
                 GraphBuilder.getInstance().getGraph().removeEdge(getElementTop(), QElement.this);
@@ -384,10 +390,16 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 }
             }
             if (getElementBottom().getSideTop().isConnected() && getSideBbottom().isConnected()) {
-                // For BS, bottom side is channel2 output
-                if (getBase().getElementType() == BaseElement.ElementType.BS) {
-                    GraphBuilder.getInstance().addEdge(QElement.this, getElementBottom(), 2);
+                // Determine edge direction based on which side is OUTPUT
+                if (getSideBbottom().getDirection() == Side.Direction.OUTPUT) {
+                    // This element outputs TO bottom element (check if this is BS)
+                    if (getBase().getElementType() == BaseElement.ElementType.BS) {
+                        GraphBuilder.getInstance().addEdge(QElement.this, getElementBottom(), 2);
+                    } else {
+                        GraphBuilder.getInstance().addEdge(QElement.this, getElementBottom());
+                    }
                 } else {
+                    // Bottom element outputs TO this element
                     GraphBuilder.getInstance().addEdge(getElementBottom(), QElement.this);
                 }
             } else {
