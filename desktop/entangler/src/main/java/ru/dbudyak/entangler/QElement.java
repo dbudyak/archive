@@ -266,7 +266,13 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 }
             }
             if (getElementLeft().getSideRight().isConnected() && getSideLeft().isConnected()) {
-                GraphBuilder.getInstance().addEdge(getElementLeft(), QElement.this);
+                // If left element is BS and its right side is output, this is channel1
+                if (getElementLeft().getBase().getElementType() == BaseElement.ElementType.BS &&
+                    getElementLeft().getSideRight().getDirection() == Side.Direction.OUTPUT) {
+                    GraphBuilder.getInstance().addEdge(getElementLeft(), QElement.this, 1);
+                } else {
+                    GraphBuilder.getInstance().addEdge(getElementLeft(), QElement.this);
+                }
             } else {
                 GraphBuilder.getInstance().getGraph().removeEdge(getElementLeft(), QElement.this);
             }
@@ -285,7 +291,13 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 }
             }
             if (getElementTop().getSideBbottom().isConnected() && getSideTop().isConnected()) {
-                GraphBuilder.getInstance().addEdge(getElementTop(), QElement.this);
+                // If top element is BS and its bottom side is output, this is channel2
+                if (getElementTop().getBase().getElementType() == BaseElement.ElementType.BS &&
+                    getElementTop().getSideBbottom().getDirection() == Side.Direction.OUTPUT) {
+                    GraphBuilder.getInstance().addEdge(getElementTop(), QElement.this, 2);
+                } else {
+                    GraphBuilder.getInstance().addEdge(getElementTop(), QElement.this);
+                }
             } else {
                 GraphBuilder.getInstance().getGraph().removeEdge(getElementTop(), QElement.this);
             }
