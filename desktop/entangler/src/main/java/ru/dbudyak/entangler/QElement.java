@@ -160,6 +160,21 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
 
             setIO();
 
+            // Update connections for all neighboring elements
+            // They need to re-evaluate their connections with the rotated element
+            if (getElementLeft() != null && getElementLeft().getBase() != null) {
+                getElementLeft().setIO();
+            }
+            if (getElementTop() != null && getElementTop().getBase() != null) {
+                getElementTop().setIO();
+            }
+            if (getElementRight() != null && getElementRight().getBase() != null) {
+                getElementRight().setIO();
+            }
+            if (getElementBottom() != null && getElementBottom().getBase() != null) {
+                getElementBottom().setIO();
+            }
+
         }
     }
 
