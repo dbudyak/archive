@@ -463,31 +463,51 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 RealMatrix in1 = in.getChannel1();
                 RealMatrix in2 = in.getChannel2();
 
-                double[][] inputStatesKron = KroneckerOperation.product(in1.getData(), in2.getData());
+                // Create combined input state vector [in1; in2] for two-mode system
+                double[][] inputState = new double[in1.getRowDimension() + in2.getRowDimension()][1];
+                for (int i = 0; i < in1.getRowDimension(); i++) {
+                    inputState[i][0] = in1.getEntry(i, 0);
+                }
+                for (int i = 0; i < in2.getRowDimension(); i++) {
+                    inputState[in1.getRowDimension() + i][0] = in2.getEntry(i, 0);
+                }
 
-                print("input state kroneker:");
-                Utils.printData(inputStatesKron);
+                print("BS input state:");
+                Utils.printData(inputState);
 
                 double theta = Double.parseDouble(getPropertiesWorker().getElementData().get("\u03B8".toString()));
 
+                // Beam splitter transformation matrix (2x2)
                 double[][] transform = {{cos(theta), sin(theta)}, {-sin(theta), cos(theta)}};
 
+                // For two-mode quantum state, we need the tensor product U ⊗ U
                 double[][] transformProduct = KroneckerOperation.product(transform, transform);
-                RealMatrix bs = new Array2DRowRealMatrix(KroneckerOperation.product(inputStatesKron, transformProduct));
 
-                print("\nBS transform matrix");
+                print("BS transform matrix (4x4):");
                 Utils.printData(transformProduct);
 
-                print("\ndata:");
-                Utils.printData(bs.getData());
+                // Apply transformation: output = U|input>
+                RealMatrix transformMatrix = new Array2DRowRealMatrix(transformProduct);
+                RealMatrix inputMatrix = new Array2DRowRealMatrix(inputState);
+                RealMatrix outputState = transformMatrix.multiply(inputMatrix);
 
-                Data out = new Data.DataBuilder().channel1(null).channel2(null).build();
-                RealMatrix res1 = new Array2DRowRealMatrix(KroneckerOperation.product(bs.getData(), inputStatesKron));
-                RealMatrix res2 = new Array2DRowRealMatrix(KroneckerOperation.product(bs.getData(), inputStatesKron));
+                print("BS output state:");
+                Utils.printData(outputState.getData());
 
-                out.setChannel1(res1);
-                out.setChannel2(res2);
+                // Split output state back into two channels
+                int halfSize = outputState.getRowDimension() / 2;
+                double[][] out1Data = new double[halfSize][1];
+                double[][] out2Data = new double[halfSize][1];
 
+                for (int i = 0; i < halfSize; i++) {
+                    out1Data[i][0] = outputState.getEntry(i, 0);
+                    out2Data[i][0] = outputState.getEntry(halfSize + i, 0);
+                }
+
+                RealMatrix res1 = new Array2DRowRealMatrix(out1Data);
+                RealMatrix res2 = new Array2DRowRealMatrix(out2Data);
+
+                Data out = new Data.DataBuilder().channel1(res1).channel2(res2).build();
                 getBase().setOut(out);
 
                 isComputed = true;
