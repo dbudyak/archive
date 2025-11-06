@@ -325,12 +325,18 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 }
             }
             if (getElementLeft().getSideRight().isConnected() && getSideLeft().isConnected()) {
-                // If left element is BS and its right side is output, this is channel1
-                if (getElementLeft().getBase().getElementType() == BaseElement.ElementType.BS &&
-                    getElementLeft().getSideRight().getDirection() == Side.Direction.OUTPUT) {
-                    GraphBuilder.getInstance().addEdge(getElementLeft(), QElement.this, 1);
+                // Determine edge direction based on which side is OUTPUT
+                if (getSideLeft().getDirection() == Side.Direction.OUTPUT) {
+                    // This element outputs TO left element
+                    GraphBuilder.getInstance().addEdge(QElement.this, getElementLeft());
                 } else {
-                    GraphBuilder.getInstance().addEdge(getElementLeft(), QElement.this);
+                    // Left element outputs TO this element (check if it's BS)
+                    if (getElementLeft().getBase().getElementType() == BaseElement.ElementType.BS &&
+                        getElementLeft().getSideRight().getDirection() == Side.Direction.OUTPUT) {
+                        GraphBuilder.getInstance().addEdge(getElementLeft(), QElement.this, 1);
+                    } else {
+                        GraphBuilder.getInstance().addEdge(getElementLeft(), QElement.this);
+                    }
                 }
             } else {
                 GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementLeft());
