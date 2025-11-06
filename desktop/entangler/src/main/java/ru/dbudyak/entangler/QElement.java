@@ -19,7 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.RealMatrix;
-import ru.dbudyak.entangler.models.base.BaseElement;
+import ru.dbudyak.entangler.models.BaseElement;
 import ru.dbudyak.entangler.math.KroneckerOperation;
 
 import java.net.URL;

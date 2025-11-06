@@ -5,7 +5,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.layout.AnchorPane;
-import ru.dbudyak.entangler.models.base.BaseElement;
+import ru.dbudyak.entangler.models.BaseElement;
 
 import java.util.HashMap;
 import java.util.Map;

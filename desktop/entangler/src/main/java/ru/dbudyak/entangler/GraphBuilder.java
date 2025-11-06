@@ -6,7 +6,7 @@ import org.jgraph.graph.GraphConstants;
 import org.jgrapht.ext.JGraphModelAdapter;
 import org.jgrapht.graph.DefaultDirectedWeightedGraph;
 import org.jgrapht.graph.DefaultWeightedEdge;
-import ru.dbudyak.entangler.models.base.BaseElement;
+import ru.dbudyak.entangler.models.BaseElement;
 
 import javax.swing.*;
 import java.awt.*;

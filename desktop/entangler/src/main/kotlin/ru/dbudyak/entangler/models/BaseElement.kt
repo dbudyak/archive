@@ -5,19 +5,24 @@ import ru.dbudyak.entangler.Data
 /**
  * Base class for all quantum circuit elements.
  *
- * @property elementType Type of the element (SOURCE, DETECTOR, BS, etc.)
+ * Kotlin's `var` properties automatically generate Java get/set methods.
  */
 class BaseElement(var elementType: ElementType) {
-    var input: Data? = null
-    var output: Data? = null
+    // Note: `in` is a Kotlin keyword, so we use backticks
+    // Java will access this as getIn()/setIn()
+    var `in`: Data? = null
+    var out: Data? = null
 
     enum class ElementType {
         MIRROR, BS, SOURCE, DETECTOR, PHASE_SHIFTER, WAVEGUIDE
     }
 
     companion object {
-        const val OUT = 1
-        const val IN = 0
-        const val NONE = -1
+        @JvmField
+        val OUT = 1
+        @JvmField
+        val IN = 0
+        @JvmField
+        val NONE = -1
     }
 }
