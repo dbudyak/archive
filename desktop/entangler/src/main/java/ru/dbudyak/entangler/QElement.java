@@ -463,52 +463,52 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 RealMatrix in1 = in.getChannel1();
                 RealMatrix in2 = in.getChannel2();
 
-                // Create combined input state vector [in1; in2] for two-mode system
-                double[][] inputState = new double[in1.getRowDimension() + in2.getRowDimension()][1];
-                for (int i = 0; i < in1.getRowDimension(); i++) {
-                    inputState[i][0] = in1.getEntry(i, 0);
-                }
-                for (int i = 0; i < in2.getRowDimension(); i++) {
-                    inputState[in1.getRowDimension() + i][0] = in2.getEntry(i, 0);
-                }
-
-                print("BS input state:");
-                Utils.printData(inputState);
+                print("BS input channel 1:");
+                Utils.printData(in1.getData());
+                print("BS input channel 2:");
+                Utils.printData(in2.getData());
 
                 double theta = Double.parseDouble(getPropertiesWorker().getElementData().get("\u03B8".toString()));
 
                 // Beam splitter transformation matrix (2x2)
+                // For input modes a and b, output modes c and d:
+                // |c⟩ = cos(θ)|a⟩ + sin(θ)|b⟩
+                // |d⟩ = -sin(θ)|a⟩ + cos(θ)|b⟩
                 double[][] transform = {{cos(theta), sin(theta)}, {-sin(theta), cos(theta)}};
 
-                // For two-mode quantum state, we need the tensor product U ⊗ U
-                double[][] transformProduct = KroneckerOperation.product(transform, transform);
+                print("BS transform matrix (2x2):");
+                Utils.printData(transform);
 
-                print("BS transform matrix (4x4):");
-                Utils.printData(transformProduct);
+                // Stack input vectors: [in1; in2] as a 2×2 matrix where columns are modes
+                // Each row represents a basis state (|0⟩ and |1⟩)
+                double[][] inputMatrix = new double[in1.getRowDimension()][2];
+                for (int i = 0; i < in1.getRowDimension(); i++) {
+                    inputMatrix[i][0] = in1.getEntry(i, 0);  // Mode a
+                    inputMatrix[i][1] = in2.getEntry(i, 0);  // Mode b
+                }
 
-                // Apply transformation: output = U|input>
-                RealMatrix transformMatrix = new Array2DRowRealMatrix(transformProduct);
-                RealMatrix inputMatrix = new Array2DRowRealMatrix(inputState);
-                RealMatrix outputState = transformMatrix.multiply(inputMatrix);
+                // Apply beam splitter: output = input × transform^T
+                RealMatrix input = new Array2DRowRealMatrix(inputMatrix);
+                RealMatrix transformMatrix = new Array2DRowRealMatrix(transform);
+                RealMatrix output = input.multiply(transformMatrix.transpose());
 
-                print("BS output state:");
-                Utils.printData(outputState.getData());
+                print("BS output:");
+                Utils.printData(output.getData());
 
-                // Split output state back into two channels
-                int halfSize = outputState.getRowDimension() / 2;
-                double[][] out1Data = new double[halfSize][1];
-                double[][] out2Data = new double[halfSize][1];
+                // Extract output modes
+                double[][] out1Data = new double[in1.getRowDimension()][1];
+                double[][] out2Data = new double[in2.getRowDimension()][1];
 
-                for (int i = 0; i < halfSize; i++) {
-                    out1Data[i][0] = outputState.getEntry(i, 0);
-                    out2Data[i][0] = outputState.getEntry(halfSize + i, 0);
+                for (int i = 0; i < in1.getRowDimension(); i++) {
+                    out1Data[i][0] = output.getEntry(i, 0);  // Mode c
+                    out2Data[i][0] = output.getEntry(i, 1);  // Mode d
                 }
 
                 RealMatrix res1 = new Array2DRowRealMatrix(out1Data);
                 RealMatrix res2 = new Array2DRowRealMatrix(out2Data);
 
-                Data out = new Data.DataBuilder().channel1(res1).channel2(res2).build();
-                getBase().setOut(out);
+                Data bsOut = new Data.DataBuilder().channel1(res1).channel2(res2).build();
+                getBase().setOut(bsOut);
 
                 isComputed = true;
                 break;
