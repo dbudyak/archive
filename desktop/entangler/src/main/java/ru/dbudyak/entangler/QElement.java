@@ -49,6 +49,7 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
     private boolean isComputed = false;
     private PropertiesWorker pw;
     private double bsTheta = Math.PI / 4; // Default theta for beam splitter (45 degrees)
+    private double detectorResult = 0.0; // Result for detector elements
 
 
     public QElement() {
@@ -271,6 +272,7 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
 
         // For detectors, show result if computed
         if (getBase().getElementType() == BaseElement.ElementType.DETECTOR && isComputed) {
+            getPropertiesWorker().setResult(String.format("%.4f", detectorResult));
             getPropertiesWorker().setDetectorCounts();
         }
     }
@@ -596,10 +598,15 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                         }
                     }
                     print("DETECTOR", "Detection probability: " + probability);
+                    detectorResult = probability;
+                    isComputed = true;
+                    // Also update PropertiesWorker if this detector is selected
                     getPropertiesWorker().setResult(String.format("%.4f", probability));
                     getPropertiesWorker().setDetectorCounts();
                 } else {
                     print("DETECTOR", "No input data");
+                    detectorResult = 0.0;
+                    isComputed = true;
                     getPropertiesWorker().setResult("0.0000");
                 }
                 break;
