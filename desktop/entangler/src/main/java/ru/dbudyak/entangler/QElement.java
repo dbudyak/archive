@@ -471,12 +471,15 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 double theta = Double.parseDouble(getPropertiesWorker().getElementData().get("\u03B8".toString()));
 
                 // Beam splitter transformation for each basis state
-                // |out1⟩ = cos(θ)|in1⟩ + sin(θ)|in2⟩
-                // |out2⟩ = -sin(θ)|in1⟩ + cos(θ)|in2⟩
+                // Inputs: two normalized states |in1⟩ and |in2⟩ (each with norm 1)
+                // Outputs: |out1⟩ = (cos(θ)|in1⟩ + sin(θ)|in2⟩)/√2
+                //          |out2⟩ = (-sin(θ)|in1⟩ + cos(θ)|in2⟩)/√2
+                // The 1/√2 normalization ensures each output has norm 1
                 double cosTheta = cos(theta);
                 double sinTheta = sin(theta);
+                double normFactor = 1.0 / sqrt(2.0);
 
-                print("BS transform: cos(θ)=" + cosTheta + ", sin(θ)=" + sinTheta);
+                print("BS transform: cos(θ)=" + cosTheta + ", sin(θ)=" + sinTheta + ", norm=1/√2=" + normFactor);
 
                 // Apply transformation to each amplitude component
                 double[][] out1Data = new double[in1.getRowDimension()][1];
@@ -486,8 +489,8 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                     double a = in1.getEntry(i, 0);
                     double b = in2.getEntry(i, 0);
 
-                    out1Data[i][0] = cosTheta * a + sinTheta * b;
-                    out2Data[i][0] = -sinTheta * a + cosTheta * b;
+                    out1Data[i][0] = normFactor * (cosTheta * a + sinTheta * b);
+                    out2Data[i][0] = normFactor * (-sinTheta * a + cosTheta * b);
                 }
 
                 print("BS output channel 1:");
