@@ -48,6 +48,7 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
     private BaseElement base;
     private boolean isComputed = false;
     private PropertiesWorker pw;
+    private double bsTheta = Math.PI / 4; // Default theta for beam splitter (45 degrees)
 
 
     public QElement() {
@@ -264,12 +265,8 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
 
         // Add element-specific properties
         if (getBase().getElementType() == BaseElement.ElementType.BS) {
-            String theta = getPropertiesWorker().getElementData().get("\u03B8");
-            if (theta != null) {
-                getPropertiesWorker().setBSTheta(Double.parseDouble(theta));
-            } else {
-                getPropertiesWorker().setBSTheta(Math.PI / 4);
-            }
+            // Display this element's theta value in the properties panel
+            getPropertiesWorker().setBSTheta(bsTheta);
         }
 
         // For detectors, show result if computed
@@ -546,7 +543,7 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 print("BS input channel 2:");
                 Utils.printData(in2.getData());
 
-                double theta = Double.parseDouble(getPropertiesWorker().getElementData().get("\u03B8".toString()));
+                double theta = bsTheta;
 
                 // Beam splitter transformation for each basis state
                 // Inputs: two normalized states |in1⟩ and |in2⟩ (each with norm 1)
