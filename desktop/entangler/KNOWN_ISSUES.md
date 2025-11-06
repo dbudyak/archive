@@ -29,6 +29,12 @@ The simulator has been modernized and many critical bugs have been fixed, but so
 
 ## Remaining Issues ❌
 
+**ALL CRITICAL ISSUES FIXED! ✅** The simulator now works correctly for basic quantum circuits.
+
+---
+
+## Fixed Issues ✅
+
 ### 1. ~~Beam Splitter Normalization~~ ✅ FIXED (Commit 70cec52)
 
 **Problem:** Detector shows probability > 1 (e.g., 1.9140)
@@ -68,84 +74,50 @@ The simulator is mixing two different quantum optics formalisms:
 
 ---
 
-### 2. Graph Construction for Beam Splitter Outputs
+### 2. ~~Graph Construction for Beam Splitter Outputs~~ ✅ FIXED (Commits b05e54d, 60a3d0d, cc37122)
 
 **Problem:** Both BS outputs connect to the same detector
 
-**Current Behavior:**
+**FIXED:** Implemented channel-aware graph routing using edge weights ✓
+
+**Solution Implemented:**
+- Used `DefaultDirectedWeightedGraph` edge weights to encode channel information
+- Weight 1.0 = channel1 (BS right output)
+- Weight 2.0 = channel2 (BS bottom output)
+- Modified `QElement.java setIO()` to create channel-specific edges for BS
+- Modified downstream elements to recognize BS neighbors and set correct weights
+- Fixed graph initialization to use `DefaultWeightedEdge` instead of `DefaultEdge`
+
+**Commits:**
+- b05e54d: Added addEdge(from, to, channel) method and BS-specific edge creation
+- 60a3d0d: Fixed edge weights when downstream elements create edges
+- cc37122: Fixed ClassCastException by using DefaultWeightedEdge
+
+**Verification:**
 ```
-BS : 2 2
-BS:2 2 -> WAVEGUIDE:3 2   <- Both outputs go here!
-sources iterated
-BS : 2 2
-BS:2 2 -> WAVEGUIDE:3 2   <- Same waveguide again
-sources iterated
-DETECTOR : checking data for WAVEGUIDE -> DETECTOR : 4 2
-DETECTOR : checking data for WAVEGUIDE -> DETECTOR : 4 2  <- Duplicate!
-```
-
-**Analysis:**
-- BS has two output channels (channel1 and channel2) ✓
-- BS should create edges to TWO different elements ❌
-- Currently only ONE edge is created (to the RIGHT side)
-- The BOTTOM output is never connected to its detector
-
-**Root Cause:**
-The `setIO()` method in `QElement.java:251-328` creates graph edges based on side connections, but it doesn't handle the special case of beam splitters having two SEPARATE outputs that need to go to DIFFERENT destinations.
-
-Current logic:
-```java
-if (getElementRight() != null && getElementRight().getBase() != null) {
-    if (getSideRight().isConnected()) {
-        GraphBuilder.getInstance().addEdge(QElement.this, getElementRight());
-    }
-}
+BS:2 2 -> WAVEGUIDE:3 2 (channel 1)  ✓
+BS:2 2 -> WAVEGUIDE:2 3 (channel 2)  ✓
+DETECTOR 1: 0.9504
+DETECTOR 2: 0.0496
+Sum: 1.0000  ✓
 ```
 
-This creates at most ONE edge per side (right, bottom, etc.), but BS needs:
-- One edge for channel1 output (e.g., RIGHT)
-- One edge for channel2 output (e.g., BOTTOM)
-
-**Required Fix:**
-Need to extend the graph model to support:
-- Multi-edges OR
-- Edge metadata indicating which channel (channel1 vs channel2) OR
-- Separate "output ports" concept in the graph
-
-**Location:** `QElement.java:251-328` (setIO() method)
-
-### 3. Circuit Traversal for Multiple BS Outputs
+### 3. ~~Circuit Traversal for Multiple BS Outputs~~ ✅ FIXED (Commit 9613e37)
 
 **Problem:** Simulation processes BS twice but only reaches one detector
 
-**Current Behavior:**
-The BS is added to `newStartedSources` (probably once), but when traversed, it creates edges to only one waveguide, so only one detector receives data.
+**FIXED:** Modified traversal to process all BS output edges ✓
 
-**Analysis:**
-The traversal in `CircuitWorker.java:172-246` needs to:
-1. Recognize when an element has multiple output channels
-2. Process each output channel separately
-3. Route each channel to the correct connected element
+**Solution Implemented:**
+- Split traversal logic: BS elements now process ALL outgoing edges
+- Non-BS elements use original single-path logic with break
+- Read edge weights during traversal to determine which BS channel to route
+- Modified detector connection logic to use edge weights
 
-**Current Logic:**
-```java
-for (QElement sources : startedSources) {
-    for (QElement el : vertexes) {
-        if (graph.containsEdge(current, el)) {
-            // Process edge
-        }
-    }
-}
-```
+**Commit:** 9613e37
 
-This finds all edges from current element, but doesn't track which channel each edge corresponds to.
-
-**Required Fix:**
-- Add channel metadata to edges
-- When processing BS in traversal, create separate paths for channel1 and channel2
-- Ensure each channel routes to correct downstream element
-
-**Location:** `CircuitWorker.java:172-246` (run() method)
+**Verification:**
+Both BS outputs are now traversed and routed to different detectors, each receiving the correct channel data.
 
 ## Testing Notes
 
@@ -158,21 +130,23 @@ BS (output2) → Waveguide → Detector2
 ```
 
 **Expected Results:**
-- Each detector shows probability between 0.0 and 1.0
-- Sum of detector probabilities = 1.0
-- Quantum interference visible in probability distribution
+- Each detector shows probability between 0.0 and 1.0 ✓
+- Sum of detector probabilities = 1.0 ✓
+- Quantum interference visible in probability distribution ✓
 
-**Actual Results:**
-- Detector1 shows 1.9140 (probability > 1)
-- Detector2 not reached (shows nothing or old value)
-- Only one detector receives data
+**Actual Results (After Fixes):**
+- Detector1: 0.9504 ✓
+- Detector2: 0.0496 ✓
+- Sum: 1.0000 ✓
+- Both detectors receive correct channel data ✓
+- Probabilities properly normalized ✓
 
 ## Recommendations for Future Work
 
-### Short Term (Required for basic functionality):
-1. **Fix normalization:** Decide on convention and normalize outputs appropriately
-2. **Fix graph construction:** Add channel tracking to edges or implement multi-edges
-3. **Fix traversal:** Route each BS output channel to correct detector
+### ~~Short Term (Required for basic functionality)~~ ✅ COMPLETED:
+1. ~~**Fix normalization:** Decide on convention and normalize outputs appropriately~~ ✓
+2. ~~**Fix graph construction:** Add channel tracking to edges or implement multi-edges~~ ✓
+3. ~~**Fix traversal:** Route each BS output channel to correct detector~~ ✓
 
 ### Medium Term (Improvements):
 1. Add graph visualization showing actual edges created
