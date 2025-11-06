@@ -141,7 +141,7 @@ class CircuitWorker {
                                 } else {
                                     if (!source.getOut().isEmptyChannel2()) {
                                         if (!source.getOut().isUsedChannel2()) {
-                                            detector.setIn(new Data.DataBuilder().channel1(source.getOut().getChannel1()).channel2(null).build());
+                                            detector.setIn(new Data.DataBuilder().channel1(source.getOut().getChannel2()).channel2(null).build());
                                             source.getOut().setChannel2isUsed();
                                             detector.compute();
                                         } else {
