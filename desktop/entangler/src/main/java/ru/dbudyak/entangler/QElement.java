@@ -406,6 +406,44 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 GraphBuilder.getInstance().getGraph().removeEdge(getElementBottom(), QElement.this);
             }
         }
+
+        // Mirror-specific logic: enforce 90° reflection
+        // Mirrors reflect light at 90 degrees based on input direction
+        if (getBase() != null && getBase().getElementType() == BaseElement.ElementType.MIRROR) {
+            // Determine which side has input (incoming edge)
+            boolean hasLeftInput = getSideLeft().isConnected() && getSideLeft().getDirection() == Side.Direction.INPUT;
+            boolean hasTopInput = getSideTop().isConnected() && getSideTop().getDirection() == Side.Direction.INPUT;
+            boolean hasRightInput = getSideRight().isConnected() && getSideRight().getDirection() == Side.Direction.INPUT;
+            boolean hasBottomInput = getSideBbottom().isConnected() && getSideBbottom().getDirection() == Side.Direction.INPUT;
+
+            // For each input direction, only allow the corresponding reflected output
+            // Mirror reflects at 90° clockwise: LEFT→TOP, TOP→RIGHT, RIGHT→BOTTOM, BOTTOM→LEFT
+            if (hasLeftInput) {
+                // Input from LEFT should only output to TOP, remove RIGHT edge
+                if (getElementRight() != null) {
+                    GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementRight());
+                }
+            }
+            if (hasBottomInput) {
+                // Input from BOTTOM should only output to RIGHT, remove TOP edge
+                if (getElementTop() != null) {
+                    GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementTop());
+                }
+            }
+            if (hasRightInput) {
+                // Input from RIGHT should only output to BOTTOM, remove LEFT edge
+                if (getElementLeft() != null) {
+                    GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementLeft());
+                }
+            }
+            if (hasTopInput) {
+                // Input from TOP should only output to RIGHT, remove BOTTOM edge
+                if (getElementBottom() != null) {
+                    GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementBottom());
+                }
+            }
+        }
+
         setOnHover();
     }
 
