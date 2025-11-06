@@ -470,39 +470,30 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
 
                 double theta = Double.parseDouble(getPropertiesWorker().getElementData().get("\u03B8".toString()));
 
-                // Beam splitter transformation matrix (2x2)
-                // For input modes a and b, output modes c and d:
-                // |c⟩ = cos(θ)|a⟩ + sin(θ)|b⟩
-                // |d⟩ = -sin(θ)|a⟩ + cos(θ)|b⟩
-                double[][] transform = {{cos(theta), sin(theta)}, {-sin(theta), cos(theta)}};
+                // Beam splitter transformation for each basis state
+                // |out1⟩ = cos(θ)|in1⟩ + sin(θ)|in2⟩
+                // |out2⟩ = -sin(θ)|in1⟩ + cos(θ)|in2⟩
+                double cosTheta = cos(theta);
+                double sinTheta = sin(theta);
 
-                print("BS transform matrix (2x2):");
-                Utils.printData(transform);
+                print("BS transform: cos(θ)=" + cosTheta + ", sin(θ)=" + sinTheta);
 
-                // Stack input vectors: [in1; in2] as a 2×2 matrix where columns are modes
-                // Each row represents a basis state (|0⟩ and |1⟩)
-                double[][] inputMatrix = new double[in1.getRowDimension()][2];
-                for (int i = 0; i < in1.getRowDimension(); i++) {
-                    inputMatrix[i][0] = in1.getEntry(i, 0);  // Mode a
-                    inputMatrix[i][1] = in2.getEntry(i, 0);  // Mode b
-                }
-
-                // Apply beam splitter: output = input × transform^T
-                RealMatrix input = new Array2DRowRealMatrix(inputMatrix);
-                RealMatrix transformMatrix = new Array2DRowRealMatrix(transform);
-                RealMatrix output = input.multiply(transformMatrix.transpose());
-
-                print("BS output:");
-                Utils.printData(output.getData());
-
-                // Extract output modes
+                // Apply transformation to each amplitude component
                 double[][] out1Data = new double[in1.getRowDimension()][1];
                 double[][] out2Data = new double[in2.getRowDimension()][1];
 
                 for (int i = 0; i < in1.getRowDimension(); i++) {
-                    out1Data[i][0] = output.getEntry(i, 0);  // Mode c
-                    out2Data[i][0] = output.getEntry(i, 1);  // Mode d
+                    double a = in1.getEntry(i, 0);
+                    double b = in2.getEntry(i, 0);
+
+                    out1Data[i][0] = cosTheta * a + sinTheta * b;
+                    out2Data[i][0] = -sinTheta * a + cosTheta * b;
                 }
+
+                print("BS output channel 1:");
+                Utils.printData(out1Data);
+                print("BS output channel 2:");
+                Utils.printData(out2Data);
 
                 RealMatrix res1 = new Array2DRowRealMatrix(out1Data);
                 RealMatrix res2 = new Array2DRowRealMatrix(out2Data);
