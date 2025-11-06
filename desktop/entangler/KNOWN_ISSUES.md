@@ -29,9 +29,11 @@ The simulator has been modernized and many critical bugs have been fixed, but so
 
 ## Remaining Issues ❌
 
-### 1. Beam Splitter Normalization
+### 1. ~~Beam Splitter Normalization~~ ✅ FIXED (Commit 70cec52)
 
 **Problem:** Detector shows probability > 1 (e.g., 1.9140)
+
+**FIXED:** Added 1/√2 normalization factor. Detectors now show 0.0-1.0 ✓
 
 **Current Behavior:**
 ```
@@ -55,6 +57,16 @@ The simulator is mixing two different quantum optics formalisms:
 3. Restructure to use proper Fock states or coherent states
 
 **Location:** `QElement.java:461-505` (BS case in compute())
+
+---
+
+### 1b. ~~Properties Panel Accumulation~~ ✅ FIXED (Commit dbe6465)
+
+**Problem:** Clicking different elements showed accumulated properties
+
+**FIXED:** Added clearProperties() to clear UI before updating ✓
+
+---
 
 ### 2. Graph Construction for Beam Splitter Outputs
 
