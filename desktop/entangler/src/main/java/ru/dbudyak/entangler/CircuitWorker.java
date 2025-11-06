@@ -207,70 +207,97 @@ class CircuitWorker {
                 source:
                 for (QElement sources : startedSources) {
                     QElement current = sources;
-                    vertex:
-                    for (QElement el : vertexes) {
-                        if (!el.marked) {
-                            if (graph.containsEdge(current, el)) {
-                                // Get edge weight to determine which channel to route
-                                Object edge = graph.getEdge(current, el);
-                                double edgeWeight = graph.getEdgeWeight(edge);
-                                int channel = (int) Math.round(edgeWeight);
 
-                                if (el.isDetector()) {
-                                    endedSources.add(current);
-                                } else {
-                                    Data childInputData;
-                                    Data parentOutputData = current.getOut();
-                                    print("\n");
-                                    print(current.getElementType().name() + ":" + current.getTag() + " -> " + el.getElementType().name() + ":" + el.getTag() + " (channel " + channel + ")");
-                                    if (el.isBS()) {
-                                        if (el.getIn() == null) {
-                                            print("BS", "create new input data");
-                                            childInputData = new Data.DataBuilder().channel1(null).channel2(null).build();
-                                            el.setIn(childInputData);
-                                        } else {
-                                            print("BS", "get input data");
-                                            childInputData = el.getIn();
-                                        }
+                    // For BS, we need to process ALL output edges, not just the first one
+                    if (current.isBS()) {
+                        for (QElement el : vertexes) {
+                            if (!el.marked) {
+                                if (graph.containsEdge(current, el)) {
+                                    // Get edge weight to determine which channel to route
+                                    Object edge = graph.getEdge(current, el);
+                                    double edgeWeight = graph.getEdgeWeight(edge);
+                                    int channel = (int) Math.round(edgeWeight);
 
-                                        if (!current.isBS()) {
-                                            if (childInputData.isEmptyChannel1() && childInputData.isEmptyChannel2()) {
-                                                print("BS", "set channel 1");
-                                                childInputData.setChannel1(parentOutputData.getChannel1());
-                                                el.setIn(childInputData);
-                                                break vertex;
-                                            }
-                                            if (!childInputData.isEmptyChannel1() && childInputData.isEmptyChannel2()) {
-                                                print("BS", "set channel 2");
-                                                childInputData.setChannel2(parentOutputData.getChannel1());
-                                                el.setIn(childInputData);
-                                                print("BS", "channels prepared");
-                                                el.compute();
-                                                newStartedSources.add(el);
-                                            }
-                                        }
+                                    if (el.isDetector()) {
+                                        endedSources.add(current);
                                     } else {
-                                        // For BS outputs, route the correct channel based on edge weight
-                                        if (current.isBS()) {
-                                            childInputData = new Data.DataBuilder().channel2(null).channel1(null).build();
-                                            if (channel == 1) {
-                                                childInputData.setChannel1(parentOutputData.getChannel1());
-                                            } else if (channel == 2) {
-                                                childInputData.setChannel1(parentOutputData.getChannel2());
-                                            } else {
-                                                // Default to channel1 if no weight specified
-                                                childInputData.setChannel1(parentOutputData.getChannel1());
-                                            }
+                                        Data childInputData;
+                                        Data parentOutputData = current.getOut();
+                                        print("\n");
+                                        print(current.getElementType().name() + ":" + current.getTag() + " -> " + el.getElementType().name() + ":" + el.getTag() + " (channel " + channel + ")");
+
+                                        // Route the correct BS channel to downstream element
+                                        childInputData = new Data.DataBuilder().channel2(null).channel1(null).build();
+                                        if (channel == 1) {
+                                            childInputData.setChannel1(parentOutputData.getChannel1());
+                                        } else if (channel == 2) {
+                                            childInputData.setChannel1(parentOutputData.getChannel2());
                                         } else {
-                                            childInputData = new Data.DataBuilder().channel2(null).channel1(null).build();
+                                            // Default to channel1 if no weight specified
                                             childInputData.setChannel1(parentOutputData.getChannel1());
                                         }
 
                                         el.setIn(childInputData);
                                         el.compute();
+                                        newStartedSources.add(el);
                                     }
-                                    current = el;
+                                }
+                            }
+                        }
+                    } else {
+                        // For non-BS elements, use original single-path traversal
+                        vertex:
+                        for (QElement el : vertexes) {
+                            if (!el.marked) {
+                                if (graph.containsEdge(current, el)) {
+                                    // Get edge weight to determine which channel to route
+                                    Object edge = graph.getEdge(current, el);
+                                    double edgeWeight = graph.getEdgeWeight(edge);
+                                    int channel = (int) Math.round(edgeWeight);
 
+                                    if (el.isDetector()) {
+                                        endedSources.add(current);
+                                    } else {
+                                        Data childInputData;
+                                        Data parentOutputData = current.getOut();
+                                        print("\n");
+                                        print(current.getElementType().name() + ":" + current.getTag() + " -> " + el.getElementType().name() + ":" + el.getTag() + " (channel " + channel + ")");
+                                        if (el.isBS()) {
+                                            if (el.getIn() == null) {
+                                                print("BS", "create new input data");
+                                                childInputData = new Data.DataBuilder().channel1(null).channel2(null).build();
+                                                el.setIn(childInputData);
+                                            } else {
+                                                print("BS", "get input data");
+                                                childInputData = el.getIn();
+                                            }
+
+                                            if (!current.isBS()) {
+                                                if (childInputData.isEmptyChannel1() && childInputData.isEmptyChannel2()) {
+                                                    print("BS", "set channel 1");
+                                                    childInputData.setChannel1(parentOutputData.getChannel1());
+                                                    el.setIn(childInputData);
+                                                    break vertex;
+                                                }
+                                                if (!childInputData.isEmptyChannel1() && childInputData.isEmptyChannel2()) {
+                                                    print("BS", "set channel 2");
+                                                    childInputData.setChannel2(parentOutputData.getChannel1());
+                                                    el.setIn(childInputData);
+                                                    print("BS", "channels prepared");
+                                                    el.compute();
+                                                    newStartedSources.add(el);
+                                                }
+                                            }
+                                        } else {
+                                            childInputData = new Data.DataBuilder().channel2(null).channel1(null).build();
+                                            childInputData.setChannel1(parentOutputData.getChannel1());
+
+                                            el.setIn(childInputData);
+                                            el.compute();
+                                        }
+                                        current = el;
+
+                                    }
                                 }
                             }
                         }
