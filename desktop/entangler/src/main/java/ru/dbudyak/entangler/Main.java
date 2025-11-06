@@ -56,7 +56,7 @@ public class Main extends Application {
         rotateBtn.setOnAction(event -> cw.rotate());
 
         Button graphBtn = (Button) scene.lookup("#mainBtnGraph");
-        graphBtn.setOnAction(event -> GraphBuilder.getInstance().show());
+        graphBtn.setOnAction(event -> GraphBuilder.INSTANCE.show());
 
         Button gridBtn = (Button) scene.lookup("#mainBtnGrid");
         gridBtn.setOnAction(event -> cw.showGrid());

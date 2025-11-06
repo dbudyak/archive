@@ -60,7 +60,7 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
     public void onDelete() {
         // Remove from graph before clearing base
         if (getBase() != null) {
-            GraphBuilder.getInstance().getGraph().removeVertex(QElement.this);
+            GraphBuilder.INSTANCE.getGraph().removeVertex(QElement.this);
         }
         setOnHover();
         addEventHandler();
@@ -328,19 +328,19 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 // Determine edge direction based on which side is OUTPUT
                 if (getSideLeft().getDirection() == Side.Direction.OUTPUT) {
                     // This element outputs TO left element
-                    GraphBuilder.getInstance().addEdge(QElement.this, getElementLeft());
+                    GraphBuilder.INSTANCE.addEdge(QElement.this, getElementLeft());
                 } else {
                     // Left element outputs TO this element (check if it's BS)
                     if (getElementLeft().getBase().getElementType() == BaseElement.ElementType.BS &&
                         getElementLeft().getSideRight().getDirection() == Side.Direction.OUTPUT) {
-                        GraphBuilder.getInstance().addEdge(getElementLeft(), QElement.this, 1);
+                        GraphBuilder.INSTANCE.addEdge(getElementLeft(), QElement.this, 1);
                     } else {
-                        GraphBuilder.getInstance().addEdge(getElementLeft(), QElement.this);
+                        GraphBuilder.INSTANCE.addEdge(getElementLeft(), QElement.this);
                     }
                 }
             } else {
-                GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementLeft());
-                GraphBuilder.getInstance().getGraph().removeEdge(getElementLeft(), QElement.this);
+                GraphBuilder.INSTANCE.getGraph().removeEdge(QElement.this, getElementLeft());
+                GraphBuilder.INSTANCE.getGraph().removeEdge(getElementLeft(), QElement.this);
             }
         }
 
@@ -360,19 +360,19 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 // Determine edge direction based on which side is OUTPUT
                 if (getSideTop().getDirection() == Side.Direction.OUTPUT) {
                     // This element outputs TO top element
-                    GraphBuilder.getInstance().addEdge(QElement.this, getElementTop());
+                    GraphBuilder.INSTANCE.addEdge(QElement.this, getElementTop());
                 } else {
                     // Top element outputs TO this element (check if it's BS)
                     if (getElementTop().getBase().getElementType() == BaseElement.ElementType.BS &&
                         getElementTop().getSideBbottom().getDirection() == Side.Direction.OUTPUT) {
-                        GraphBuilder.getInstance().addEdge(getElementTop(), QElement.this, 2);
+                        GraphBuilder.INSTANCE.addEdge(getElementTop(), QElement.this, 2);
                     } else {
-                        GraphBuilder.getInstance().addEdge(getElementTop(), QElement.this);
+                        GraphBuilder.INSTANCE.addEdge(getElementTop(), QElement.this);
                     }
                 }
             } else {
-                GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementTop());
-                GraphBuilder.getInstance().getGraph().removeEdge(getElementTop(), QElement.this);
+                GraphBuilder.INSTANCE.getGraph().removeEdge(QElement.this, getElementTop());
+                GraphBuilder.INSTANCE.getGraph().removeEdge(getElementTop(), QElement.this);
             }
         }
 
@@ -393,17 +393,17 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 if (getSideRight().getDirection() == Side.Direction.OUTPUT) {
                     // This element outputs TO right element (check if this is BS)
                     if (getBase().getElementType() == BaseElement.ElementType.BS) {
-                        GraphBuilder.getInstance().addEdge(QElement.this, getElementRight(), 1);
+                        GraphBuilder.INSTANCE.addEdge(QElement.this, getElementRight(), 1);
                     } else {
-                        GraphBuilder.getInstance().addEdge(QElement.this, getElementRight());
+                        GraphBuilder.INSTANCE.addEdge(QElement.this, getElementRight());
                     }
                 } else {
                     // Right element outputs TO this element
-                    GraphBuilder.getInstance().addEdge(getElementRight(), QElement.this);
+                    GraphBuilder.INSTANCE.addEdge(getElementRight(), QElement.this);
                 }
             } else {
-                GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementRight());
-                GraphBuilder.getInstance().getGraph().removeEdge(getElementRight(), QElement.this);
+                GraphBuilder.INSTANCE.getGraph().removeEdge(QElement.this, getElementRight());
+                GraphBuilder.INSTANCE.getGraph().removeEdge(getElementRight(), QElement.this);
             }
         }
 
@@ -424,17 +424,17 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 if (getSideBbottom().getDirection() == Side.Direction.OUTPUT) {
                     // This element outputs TO bottom element (check if this is BS)
                     if (getBase().getElementType() == BaseElement.ElementType.BS) {
-                        GraphBuilder.getInstance().addEdge(QElement.this, getElementBottom(), 2);
+                        GraphBuilder.INSTANCE.addEdge(QElement.this, getElementBottom(), 2);
                     } else {
-                        GraphBuilder.getInstance().addEdge(QElement.this, getElementBottom());
+                        GraphBuilder.INSTANCE.addEdge(QElement.this, getElementBottom());
                     }
                 } else {
                     // Bottom element outputs TO this element
-                    GraphBuilder.getInstance().addEdge(getElementBottom(), QElement.this);
+                    GraphBuilder.INSTANCE.addEdge(getElementBottom(), QElement.this);
                 }
             } else {
-                GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementBottom());
-                GraphBuilder.getInstance().getGraph().removeEdge(getElementBottom(), QElement.this);
+                GraphBuilder.INSTANCE.getGraph().removeEdge(QElement.this, getElementBottom());
+                GraphBuilder.INSTANCE.getGraph().removeEdge(getElementBottom(), QElement.this);
             }
         }
 
@@ -780,7 +780,7 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 boolean success = false;
                 if (db.hasString()) {
                     String id = db.getString();
-                    setImage(new Utils().getImageByElId(id));
+                    setImage(Utils.INSTANCE.getImageByElId(id));
                     BaseElement.ElementType elementType = getElementType(id);
                     setBase(new BaseElement(elementType));
                     setPw(PropertiesWorker.getInstance());
@@ -796,7 +796,7 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                     initializeSideDirections(elementType);
 
                     // Add element to graph
-                    GraphBuilder.getInstance().getGraph().addVertex(QElement.this);
+                    GraphBuilder.INSTANCE.getGraph().addVertex(QElement.this);
 
                     success = true;
                     setIO();

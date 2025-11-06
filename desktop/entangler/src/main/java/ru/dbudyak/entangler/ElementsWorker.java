@@ -29,7 +29,7 @@ class ElementsWorker {
             for (Node n : grid.getChildren()) {
                 QElement qElement = (QElement) n;
                 qElement.getStyleClass().add("qelement");
-                Image image = new Utils().getImageByElId(qElement.getId());
+                Image image = Utils.INSTANCE.getImageByElId(qElement.getId());
                 qElement.setImage(image);
                 qElement.setOnDragDetected(event -> {
                     Dragboard db = qElement.startDragAndDrop(TransferMode.COPY);

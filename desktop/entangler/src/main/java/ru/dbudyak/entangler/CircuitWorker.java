@@ -101,7 +101,7 @@ class CircuitWorker {
         final Set edges;
 
         private CircuitWorkerProcessor() {
-            graph = GraphBuilder.getInstance().getGraph();
+            graph = GraphBuilder.INSTANCE.getGraph();
             Set<QElement> set = graph.vertexSet();
             vertexes = new ArrayList<>();
             detectors = new ArrayList<>();
