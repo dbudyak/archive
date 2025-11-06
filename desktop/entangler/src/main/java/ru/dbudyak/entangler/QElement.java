@@ -333,6 +333,7 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                     GraphBuilder.getInstance().addEdge(getElementLeft(), QElement.this);
                 }
             } else {
+                GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementLeft());
                 GraphBuilder.getInstance().getGraph().removeEdge(getElementLeft(), QElement.this);
             }
         }
@@ -364,6 +365,7 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                     }
                 }
             } else {
+                GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementTop());
                 GraphBuilder.getInstance().getGraph().removeEdge(getElementTop(), QElement.this);
             }
         }
@@ -381,13 +383,20 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 }
             }
             if (getElementRight().getSideLeft().isConnected() && getSideRight().isConnected()) {
-                // For BS, right side is channel1 output
-                if (getBase().getElementType() == BaseElement.ElementType.BS) {
-                    GraphBuilder.getInstance().addEdge(QElement.this, getElementRight(), 1);
+                // Determine edge direction based on which side is OUTPUT
+                if (getSideRight().getDirection() == Side.Direction.OUTPUT) {
+                    // This element outputs TO right element (check if this is BS)
+                    if (getBase().getElementType() == BaseElement.ElementType.BS) {
+                        GraphBuilder.getInstance().addEdge(QElement.this, getElementRight(), 1);
+                    } else {
+                        GraphBuilder.getInstance().addEdge(QElement.this, getElementRight());
+                    }
                 } else {
+                    // Right element outputs TO this element
                     GraphBuilder.getInstance().addEdge(getElementRight(), QElement.this);
                 }
             } else {
+                GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementRight());
                 GraphBuilder.getInstance().getGraph().removeEdge(getElementRight(), QElement.this);
             }
         }
@@ -418,6 +427,7 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                     GraphBuilder.getInstance().addEdge(getElementBottom(), QElement.this);
                 }
             } else {
+                GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementBottom());
                 GraphBuilder.getInstance().getGraph().removeEdge(getElementBottom(), QElement.this);
             }
         }
