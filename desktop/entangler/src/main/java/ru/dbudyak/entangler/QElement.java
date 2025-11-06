@@ -407,45 +407,6 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
             }
         }
 
-        // Mirror-specific logic: enforce 90° reflection
-        // Mirrors reflect light at 90 degrees based on input direction
-        // Default orientation: diagonal from top-left to bottom-right
-        if (getBase() != null && getBase().getElementType() == BaseElement.ElementType.MIRROR) {
-            // Determine which side has input (incoming edge)
-            boolean hasLeftInput = getSideLeft().isConnected() && getSideLeft().getDirection() == Side.Direction.INPUT;
-            boolean hasTopInput = getSideTop().isConnected() && getSideTop().getDirection() == Side.Direction.INPUT;
-            boolean hasRightInput = getSideRight().isConnected() && getSideRight().getDirection() == Side.Direction.INPUT;
-            boolean hasBottomInput = getSideBbottom().isConnected() && getSideBbottom().getDirection() == Side.Direction.INPUT;
-
-            // For each input direction, only allow the corresponding reflected output
-            // Based on default visual orientation (diagonal from top-left to bottom-right):
-            // TOP→RIGHT, LEFT→BOTTOM, RIGHT→TOP, BOTTOM→LEFT
-            if (hasTopInput) {
-                // Input from TOP should only output to RIGHT, remove BOTTOM edge
-                if (getElementBottom() != null) {
-                    GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementBottom());
-                }
-            }
-            if (hasLeftInput) {
-                // Input from LEFT should only output to BOTTOM, remove RIGHT edge
-                if (getElementRight() != null) {
-                    GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementRight());
-                }
-            }
-            if (hasRightInput) {
-                // Input from RIGHT should only output to TOP, remove BOTTOM edge
-                if (getElementBottom() != null) {
-                    GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementBottom());
-                }
-            }
-            if (hasBottomInput) {
-                // Input from BOTTOM should only output to LEFT, remove RIGHT edge
-                if (getElementRight() != null) {
-                    GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementRight());
-                }
-            }
-        }
-
         setOnHover();
     }
 
@@ -724,12 +685,12 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 getSideBbottom().setDirection(Side.Direction.INPUT);
                 break;
             case MIRROR:
-                // Mirror reflects light at 45 degrees (diagonal from top-left to bottom-right)
-                // Default visual orientation: accepts input from TOP and LEFT, outputs to RIGHT and BOTTOM
-                // TOP input reflects to RIGHT, LEFT input reflects to BOTTOM
+                // Mirror has ONE input and ONE output
+                // Default orientation (diagonal top-left to bottom-right): LEFT input → BOTTOM output
+                // This creates a 90° reflection: light from left reflects downward
                 getSideLeft().setDirection(Side.Direction.INPUT);
-                getSideTop().setDirection(Side.Direction.INPUT);
-                getSideRight().setDirection(Side.Direction.OUTPUT);
+                getSideTop().setDirection(Side.Direction.NONE);
+                getSideRight().setDirection(Side.Direction.NONE);
                 getSideBbottom().setDirection(Side.Direction.OUTPUT);
                 break;
             case BS:
