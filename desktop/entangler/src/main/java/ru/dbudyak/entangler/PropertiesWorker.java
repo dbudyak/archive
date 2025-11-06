@@ -93,16 +93,25 @@ public class PropertiesWorker {
     public void setType(BaseElement.ElementType type) {
     }
 
+    public void clearProperties() {
+        if (keys != null) {
+            keys.getItems().clear();
+        }
+        if (values != null) {
+            values.getItems().clear();
+        }
+    }
+
     public void updateProperties() {
+        // Clear old properties from UI first
+        clearProperties();
+
+        // Then populate with current element's properties
         for (Map.Entry<String, String> e : data.entrySet()) {
             String key = e.getKey();
             String value = e.getValue();
-            if (keys.getItems().contains(key)) {
-                values.getItems().set(keys.getItems().indexOf(key), value);
-            } else {
-                keys.getItems().add(key);
-                values.getItems().add(value);
-            }
+            keys.getItems().add(key);
+            values.getItems().add(value);
         }
     }
 
