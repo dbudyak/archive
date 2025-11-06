@@ -244,6 +244,40 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
+    private void populateProperties() {
+        // Populate properties for this element
+        getPropertiesWorker().setName(getBase().getElementType().name());
+
+        // Add connection status for each side
+        if (getSideLeft().isConnected()) {
+            getPropertiesWorker().setLeft("Left", "Connected");
+        }
+        if (getSideTop().isConnected()) {
+            getPropertiesWorker().setTop("Top", "Connected");
+        }
+        if (getSideRight().isConnected()) {
+            getPropertiesWorker().setRight("Right", "Connected");
+        }
+        if (getSideBbottom().isConnected()) {
+            getPropertiesWorker().setBottom("Bottom", "Connected");
+        }
+
+        // Add element-specific properties
+        if (getBase().getElementType() == BaseElement.ElementType.BS) {
+            String theta = getPropertiesWorker().getElementData().get("\u03B8");
+            if (theta != null) {
+                getPropertiesWorker().setBSTheta(Double.parseDouble(theta));
+            } else {
+                getPropertiesWorker().setBSTheta(Math.PI / 4);
+            }
+        }
+
+        // For detectors, show result if computed
+        if (getBase().getElementType() == BaseElement.ElementType.DETECTOR && isComputed) {
+            getPropertiesWorker().setDetectorCounts();
+        }
+    }
+
     public void addEventHandler() {
         addEventHandler(DragEvent.ANY, new QEventHandler());
         setOnMouseClicked(mouseEvent -> {
@@ -252,6 +286,9 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 // Re-register this element as the listener for property actions
                 getPropertiesWorker().setOnPropertiesListener(QElement.this);
                 if (getBase() != null) {
+                    // Clear old data and repopulate with this element's properties
+                    getPropertiesWorker().clearData();
+                    populateProperties();
                     getPropertiesWorker().updateProperties();
                 }
             }
@@ -693,8 +730,11 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                     setImage(new Utils().getImageByElId(id));
                     BaseElement.ElementType elementType = getElementType(id);
                     setBase(new BaseElement(elementType));
-                    setPw(new PropertiesWorker());
-                    getPropertiesWorker().setPropertiesLayout((AnchorPane) getScene().lookup("#props"));
+                    setPw(PropertiesWorker.getInstance());
+                    // Only set layout if not already set (first element)
+                    if (getPropertiesWorker().getPropertiesAnchor() == null) {
+                        getPropertiesWorker().setPropertiesLayout((AnchorPane) getScene().lookup("#props"));
+                    }
                     getPropertiesWorker().setType(getBase().getElementType());
                     getPropertiesWorker().setOnPropertiesListener(QElement.this);
                     getPropertiesWorker().setName(getBase().getElementType().name());

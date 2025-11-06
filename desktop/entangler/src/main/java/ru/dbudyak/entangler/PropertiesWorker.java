@@ -16,11 +16,24 @@ import java.util.Map;
 @SuppressWarnings("ALL")
 public class PropertiesWorker {
 
+    private static PropertiesWorker instance;
+
     private OnPropertiesUpdate propertiesUpdate;
     private AnchorPane props;
     private ListView keys, values;
 
     private HashMap<String, String> data = new HashMap<>();
+
+    // Private constructor for singleton
+    private PropertiesWorker() {
+    }
+
+    public static PropertiesWorker getInstance() {
+        if (instance == null) {
+            instance = new PropertiesWorker();
+        }
+        return instance;
+    }
 
     public HashMap<String, String> getElementData() {
         return data;
@@ -94,12 +107,18 @@ public class PropertiesWorker {
     }
 
     public void clearProperties() {
+        // Clear the UI
         if (keys != null) {
             keys.getItems().clear();
         }
         if (values != null) {
             values.getItems().clear();
         }
+    }
+
+    public void clearData() {
+        // Clear the data HashMap
+        data.clear();
     }
 
     public void updateProperties() {
