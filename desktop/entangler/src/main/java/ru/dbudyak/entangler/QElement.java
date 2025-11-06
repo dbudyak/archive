@@ -149,9 +149,9 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
             setSright(nsright);
             setSbottom(nsbottom);
 
-            // After rotating sides, reset their directions for BS only
-            // Mirrors should keep rotated directions, BS needs fixed pattern
-            if (getBase().getElementType() == BaseElement.ElementType.BS) {
+            // After rotating sides, reset their directions for mirrors and BS
+            // Both need specific INPUT/OUTPUT patterns to work correctly
+            if (getBase().getElementType() != null) {
                 initializeSideDirections(getBase().getElementType());
             }
 
@@ -667,10 +667,12 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 getSideBbottom().setDirection(Side.Direction.INPUT);
                 break;
             case MIRROR:
-                // Mirror can input from one side and output from another
+                // Mirror should accept input from any side and output to adjacent side
+                // Set all sides to BOTH (acts as both input and output)
+                // This allows mirrors to work in any rotation
                 getSideLeft().setDirection(Side.Direction.INPUT);
-                getSideTop().setDirection(Side.Direction.INPUT);
-                getSideRight().setDirection(Side.Direction.OUTPUT);
+                getSideTop().setDirection(Side.Direction.OUTPUT);
+                getSideRight().setDirection(Side.Direction.INPUT);
                 getSideBbottom().setDirection(Side.Direction.OUTPUT);
                 break;
             case BS:
