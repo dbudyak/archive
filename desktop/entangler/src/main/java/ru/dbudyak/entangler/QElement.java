@@ -153,7 +153,7 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
 
             // After rotating sides, only reset BS directions
             // BS has a fixed INPUT/OUTPUT pattern that doesn't rotate
-            // Mirrors should preserve their rotated directions (the Side objects carry their Direction values)
+            // Mirrors and waveguides preserve their rotated directions (the Side objects carry their Direction values)
             if (getBase().getElementType() == BaseElement.ElementType.BS) {
                 initializeSideDirections(getBase().getElementType());
             }
@@ -718,11 +718,13 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 getPropertiesWorker().setBSTheta(Math.PI / 4); // 45 degrees
                 break;
             case WAVEGUIDE:
-                // Waveguide passes light through
+                // Waveguide passes light through in one direction
+                // Default: horizontal (LEFT → RIGHT)
+                // Can be rotated to vertical (TOP → BOTTOM)
                 getSideLeft().setDirection(Side.Direction.INPUT);
-                getSideTop().setDirection(Side.Direction.INPUT);
+                getSideTop().setDirection(Side.Direction.NONE);
                 getSideRight().setDirection(Side.Direction.OUTPUT);
-                getSideBbottom().setDirection(Side.Direction.OUTPUT);
+                getSideBbottom().setDirection(Side.Direction.NONE);
                 break;
             case PHASE_SHIFTER:
                 getSideLeft().setDirection(Side.Direction.INPUT);
