@@ -149,6 +149,11 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
             setSright(nsright);
             setSbottom(nsbottom);
 
+            // After rotating sides, reset their directions based on element type
+            // This is critical for mirrors and BS which need specific INPUT/OUTPUT patterns
+            if (getBase().getElementType() != null) {
+                initializeSideDirections(getBase().getElementType());
+            }
 
             setIO();
 
