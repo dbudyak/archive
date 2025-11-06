@@ -151,9 +151,10 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
             setSright(nsright);
             setSbottom(nsbottom);
 
-            // After rotating sides, reset their directions for mirrors and BS
-            // Both need specific INPUT/OUTPUT patterns to work correctly
-            if (getBase().getElementType() != null) {
+            // After rotating sides, only reset BS directions
+            // BS has a fixed INPUT/OUTPUT pattern that doesn't rotate
+            // Mirrors should preserve their rotated directions (the Side objects carry their Direction values)
+            if (getBase().getElementType() == BaseElement.ElementType.BS) {
                 initializeSideDirections(getBase().getElementType());
             }
 
@@ -683,13 +684,13 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 getSideBbottom().setDirection(Side.Direction.INPUT);
                 break;
             case MIRROR:
-                // Mirror should accept input from any side and output to adjacent side
-                // Set all sides to BOTH (acts as both input and output)
-                // This allows mirrors to work in any rotation
+                // Mirror reflects light at 45 degrees (diagonal from bottom-left to top-right)
+                // Default orientation: accepts input from LEFT and BOTTOM, outputs to TOP and RIGHT
+                // This matches the physical mirror geometry shown in the image
                 getSideLeft().setDirection(Side.Direction.INPUT);
                 getSideTop().setDirection(Side.Direction.OUTPUT);
-                getSideRight().setDirection(Side.Direction.INPUT);
-                getSideBbottom().setDirection(Side.Direction.OUTPUT);
+                getSideRight().setDirection(Side.Direction.OUTPUT);
+                getSideBbottom().setDirection(Side.Direction.INPUT);
                 break;
             case BS:
                 // Beam splitter has two inputs and two outputs
