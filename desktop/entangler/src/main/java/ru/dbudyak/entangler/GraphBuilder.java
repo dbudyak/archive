@@ -1,11 +1,11 @@
 package ru.dbudyak.entangler;
 
 import org.jgraph.JGraph;
-import org.jgraph.graph.DefaultEdge;
 import org.jgraph.graph.DefaultGraphCell;
 import org.jgraph.graph.GraphConstants;
 import org.jgrapht.ext.JGraphModelAdapter;
 import org.jgrapht.graph.DefaultDirectedWeightedGraph;
+import org.jgrapht.graph.DefaultWeightedEdge;
 import ru.dbudyak.entangler.models.base.BaseElement;
 
 import javax.swing.*;
@@ -26,7 +26,7 @@ public class GraphBuilder {
     private JGraphModelAdapter adapter;
 
     private GraphBuilder() {
-        setGraph(new DefaultDirectedWeightedGraph<>(DefaultEdge.class));
+        setGraph(new DefaultDirectedWeightedGraph<>(DefaultWeightedEdge.class));
         adapter = new JGraphModelAdapter(getGraph());
     }
 
@@ -72,7 +72,7 @@ public class GraphBuilder {
      * @param channel Channel number (1 or 2, use 0 for default)
      */
     public void addEdge(QElement from, QElement to, int channel) {
-        DefaultEdge edge = (DefaultEdge) getGraph().addEdge(from, to);
+        DefaultWeightedEdge edge = (DefaultWeightedEdge) getGraph().addEdge(from, to);
         if (edge != null) {
             getGraph().setEdgeWeight(edge, (double) channel);
         }
