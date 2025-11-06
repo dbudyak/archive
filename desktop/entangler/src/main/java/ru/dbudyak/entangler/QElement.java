@@ -409,6 +409,7 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
 
         // Mirror-specific logic: enforce 90° reflection
         // Mirrors reflect light at 90 degrees based on input direction
+        // Default orientation: diagonal from top-left to bottom-right
         if (getBase() != null && getBase().getElementType() == BaseElement.ElementType.MIRROR) {
             // Determine which side has input (incoming edge)
             boolean hasLeftInput = getSideLeft().isConnected() && getSideLeft().getDirection() == Side.Direction.INPUT;
@@ -417,29 +418,30 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
             boolean hasBottomInput = getSideBbottom().isConnected() && getSideBbottom().getDirection() == Side.Direction.INPUT;
 
             // For each input direction, only allow the corresponding reflected output
-            // Mirror reflects at 90° clockwise: LEFT→TOP, TOP→RIGHT, RIGHT→BOTTOM, BOTTOM→LEFT
-            if (hasLeftInput) {
-                // Input from LEFT should only output to TOP, remove RIGHT edge
-                if (getElementRight() != null) {
-                    GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementRight());
-                }
-            }
-            if (hasBottomInput) {
-                // Input from BOTTOM should only output to RIGHT, remove TOP edge
-                if (getElementTop() != null) {
-                    GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementTop());
-                }
-            }
-            if (hasRightInput) {
-                // Input from RIGHT should only output to BOTTOM, remove LEFT edge
-                if (getElementLeft() != null) {
-                    GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementLeft());
-                }
-            }
+            // Based on default visual orientation (diagonal from top-left to bottom-right):
+            // TOP→RIGHT, LEFT→BOTTOM, RIGHT→TOP, BOTTOM→LEFT
             if (hasTopInput) {
                 // Input from TOP should only output to RIGHT, remove BOTTOM edge
                 if (getElementBottom() != null) {
                     GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementBottom());
+                }
+            }
+            if (hasLeftInput) {
+                // Input from LEFT should only output to BOTTOM, remove RIGHT edge
+                if (getElementRight() != null) {
+                    GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementRight());
+                }
+            }
+            if (hasRightInput) {
+                // Input from RIGHT should only output to TOP, remove BOTTOM edge
+                if (getElementBottom() != null) {
+                    GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementBottom());
+                }
+            }
+            if (hasBottomInput) {
+                // Input from BOTTOM should only output to LEFT, remove RIGHT edge
+                if (getElementRight() != null) {
+                    GraphBuilder.getInstance().getGraph().removeEdge(QElement.this, getElementRight());
                 }
             }
         }
@@ -722,13 +724,13 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
                 getSideBbottom().setDirection(Side.Direction.INPUT);
                 break;
             case MIRROR:
-                // Mirror reflects light at 45 degrees (diagonal from bottom-left to top-right)
-                // Default orientation: accepts input from LEFT and BOTTOM, outputs to TOP and RIGHT
-                // This matches the physical mirror geometry shown in the image
+                // Mirror reflects light at 45 degrees (diagonal from top-left to bottom-right)
+                // Default visual orientation: accepts input from TOP and LEFT, outputs to RIGHT and BOTTOM
+                // TOP input reflects to RIGHT, LEFT input reflects to BOTTOM
                 getSideLeft().setDirection(Side.Direction.INPUT);
-                getSideTop().setDirection(Side.Direction.OUTPUT);
+                getSideTop().setDirection(Side.Direction.INPUT);
                 getSideRight().setDirection(Side.Direction.OUTPUT);
-                getSideBbottom().setDirection(Side.Direction.INPUT);
+                getSideBbottom().setDirection(Side.Direction.OUTPUT);
                 break;
             case BS:
                 // Beam splitter has two inputs and two outputs
