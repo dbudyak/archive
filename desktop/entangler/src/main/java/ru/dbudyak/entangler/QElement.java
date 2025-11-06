@@ -249,6 +249,8 @@ public class QElement extends ImageView implements Initializable, PropertiesWork
         setOnMouseClicked(mouseEvent -> {
             if (getBase() != null) {
                 getPropertiesWorker().setPropertiesVisibility(true);
+                // Re-register this element as the listener for property actions
+                getPropertiesWorker().setOnPropertiesListener(QElement.this);
                 if (getBase() != null) {
                     getPropertiesWorker().updateProperties();
                 }
