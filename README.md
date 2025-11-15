@@ -6,7 +6,7 @@ Also, while finding something and putting it here, now I can tell people that "I
 - [2014 Entangler](https://github.com/dbudyak/archive/tree/master/desktop/entangler) - my Master's project that deserved much better dedication back in the day
 - [2016 The TVDB Client](https://github.com/dbudyak/archive/tree/master/android/TheTVDB) - home assignment for an Android dev position at a locally popular media streaming company
 - [201x](https://github.com/dbudyak/archive/tree/master/android/letsfly) - likely another home assignment for another Android dev position
-- [201x](https://github.com/dbudyak/archive/tree/master/android/flibsAndroid) - a thing to read books, made it for a friend
+- [2016](https://github.com/dbudyak/archive/tree/master/android/flibsAndroid) - a thing to read books, made it for a friend
 - [201x](https://github.com/dbudyak/archive/tree/master/android/medbox-android) - bootstrapped Android client for a prospective medical startup, which lasted for almost two months
 - [2022](https://github.com/dbudyak/archive/tree/master/backend/wolt-task-openhours) - backend home assigment for Wolt.....
 
