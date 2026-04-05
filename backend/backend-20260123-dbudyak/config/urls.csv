@@ -1,0 +1,21 @@
+url,interval_seconds,regex_pattern
+https://example.com,47,Example Domain
+https://httpstat.us/200,123,200 OK
+https://httpbin.org/get,89,"origin"
+https://jsonplaceholder.typicode.com/posts/1,256,"userId":\s*\d+
+https://api.github.com,178,current_user_url
+https://www.google.com,34,<title>Google</title>
+https://cloudflare.com,201,Cloudflare
+https://status.aws.amazon.com,67,Service Health Dashboard
+https://www.wikipedia.org,142,Wikipedia
+https://httpbin.org/status/200,15,
+https://dummyjson.com/products/1,287,"id":\s*1
+https://reqres.in/api/users/1,53,"data":\s*\{
+https://catfact.ninja/fact,198,"fact":\s*"
+https://official-joke-api.appspot.com/random_joke,112,"setup":\s*"
+https://dog.ceo/api/breeds/list/all,244,"message":\s*\{
+https://api.ipify.org?format=json,29,"ip":\s*"\d+\.\d+\.\d+\.\d+"
+https://worldtimeapi.org/api/ip,167,"timezone":\s*"
+https://httpbin.org/headers,78,"headers":\s*\{
+https://postman-echo.com/get,221,"headers":\s*\{
+https://api.publicapis.org/random,95,"entries":\s*\[
